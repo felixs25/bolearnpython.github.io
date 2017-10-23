@@ -1,0 +1,1259 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="requests,爬虫," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="满天星辰" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="requestsimport requests.adapters # 不同方式获取网页内容, 返回一个Response对象, 请求的参数可以为url或Request对象 r0 = requests.get(&amp;quot;https://github.com/timeline.json&amp;quot;) r1 = requests.post(&amp;quot;http://httpbin.org/post&amp;qu">
+<meta name="keywords" content="requests,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="requests">
+<meta property="og:url" content="https://www.xncoding.com/2017/10/23/python/requests.html">
+<meta property="og:site_name" content="满天星辰">
+<meta property="og:description" content="requestsimport requests.adapters # 不同方式获取网页内容, 返回一个Response对象, 请求的参数可以为url或Request对象 r0 = requests.get(&amp;quot;https://github.com/timeline.json&amp;quot;) r1 = requests.post(&amp;quot;http://httpbin.org/post&amp;qu">
+<meta property="og:updated_time" content="2017-10-23T05:07:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="requests">
+<meta name="twitter:description" content="requestsimport requests.adapters # 不同方式获取网页内容, 返回一个Response对象, 请求的参数可以为url或Request对象 r0 = requests.get(&amp;quot;https://github.com/timeline.json&amp;quot;) r1 = requests.post(&amp;quot;http://httpbin.org/post&amp;qu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'OFNGCUOLOW',
+      apiKey: '2cd2edac28bf6f65be36c05bdfb1a245',
+      indexName: 'xnindex',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xncoding.com/2017/10/23/python/requests.html"/>
+
+
+
+
+
+  <title> requests | 满天星辰 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">满天星辰</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/requests.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="满天星辰">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                requests
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/23/python/requests.html" class="leancloud_visitors" data-flag-title="requests">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h1><pre><code>import requests.adapters
+# 不同方式获取网页内容, 返回一个Response对象, 请求的参数可以为url或Request对象
+r0 = requests.get(&quot;https://github.com/timeline.json&quot;)
+r1 = requests.post(&quot;http://httpbin.org/post&quot;)
+r2 = requests.put(&quot;http://httpbin.org/put&quot;)
+r3 = requests.delete(&quot;http://httpbin.org/delete&quot;)
+r4 = requests.head(&quot;http://httpbin.org/get&quot;)
+r5 = requests.options(&quot;http://httpbin.org/get&quot;)
+r6 = requests.patch(&quot;http://httpbin.org/get&quot;)
+
+# Request对象:
+# class requests.Request(method=None, url=None, headers=None, files=None, data=None, params=None, auth=None, cookies=None, hooks=None, json=None)
+
+# 上边所有的获取方式都调用底层的request方法, 所以request方法有的参数, 上边几个函数都应该有:
+# requests.request(method, url, **kwargs)
+# kwargs包括: params / data / json / headers / cookies / files / auth / timeout / allow_redirects(bool) / proxies / verify(bool) / stream / cert
+
+# Response对象: class requests.Response
+# 包含的主要属性: content / cookies / encoding / headers / history / is_permanent_redirect / is_redirect / reason / status_code / text / url 等
+# 包含的主要方法: iter_content(chunk_size=1, decode_unicode=False) / iter_lines(chunk_size=512, decode_unicode=None, delimiter=None)
+# 包含的主要方法: close() / json(**kwargs) / raise_for_status() 等
+
+# 以字典的形式传递URL参数, 也可以直接以?xx=xx&amp;xx=xx的形式将其放在url后
+params = {&quot;key1&quot;: &quot;value1&quot;, &quot;key2&quot;: &quot;value2&quot;}
+r = requests.get(&quot;http://httpbin.org/get&quot;, params=params)
+print(r.url)                # http://httpbin.org/get?key2=value2&amp;key1=value1
+
+# 以字典的形式传递URL参数: 字典里带有列表
+params = {&quot;key1&quot;: &quot;value1&quot;, &quot;key2&quot;: [&quot;value2&quot;, &quot;value3&quot;]}
+r = requests.get(&quot;http://httpbin.org/get&quot;, params=params)
+print(r.url)                # http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3
+
+# 获取网页内容
+r = requests.get(&quot;https://github.com/timeline.json&quot;)
+print(r.text)               # 返回正常的网页内容, 即解压解码之后的内容
+print(r.content)            # 返回byte类型的网页内容, 即值解压, 没有解码
+print(r.json())             # 如果网页内容为json, 直接返回一个json对象
+print(r.encoding)           # 返回网页的编码: &quot;utf-8&quot;
+
+# Requests会自动解码来自服务器的内容, 也可以自己更改
+r.encoding = &quot;ISO-8859-1&quot;
+print(r.text)               # 此时使用新的r.encoding解码后的新值
+
+# 编码的其他操作
+# requests.utils.get_encodings_from_content(content): Returns encodings from given content string.
+# requests.utils.get_encoding_from_headers(headers): Returns encodings from given HTTP Header Dict.
+# requests.utils.get_unicode_from_response(r): Returns the requested content back in unicode.
+
+# 原始响应内容: 获取来自服务器的原始套接字响应
+r = requests.get(&quot;https://github.com/timeline.json&quot;, stream=True)
+print(r.raw)                # &lt;requests.packages.urllib3.response.HTTPResponse object at 0x101194810&gt;
+print(r.raw.read(10))       # &quot;\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\x03&quot;
+
+# 一般情况下, 应该以下面的模式将文本流保存到文件
+with open(&quot;test&quot;, &quot;wb&quot;) as fd:
+    for chunk in r.iter_content(chunk_size=256):
+        fd.write(chunk)
+# 注意: 设置的timeout对connect和read起作用. 但一旦和服务器建立连接, r.content或r.iter_content就处于一个read的状态, 不受timeout影响
+
+# 定制请求头: 一个字典
+headers = {&quot;user-agent&quot;: &quot;my-app/0.0.1&quot;}
+r = requests.get(&quot;https://api.github.com/some/endpoint&quot;, headers=headers)
+print(r.request.headers)    # 获取request的头部
+print(r.headers)            # 获取response的头部
+# {
+#     &quot;content-encoding&quot;: &quot;gzip&quot;,
+#     &quot;transfer-encoding&quot;: &quot;chunked&quot;,
+#     &quot;connection&quot;: &quot;close&quot;,
+#     &quot;server&quot;: &quot;nginx/1.0.4&quot;,
+#     &quot;x-runtime&quot;: &quot;148ms&quot;,
+#     &quot;etag&quot;: &quot;e1ca502697e5c9317743dc078f67693f&quot;,
+#     &quot;content-type&quot;: &quot;application/json&quot;
+# }
+print(r.headers[&quot;Content-Type&quot;])        # &quot;application/json&quot;
+print(r.headers.get(&quot;content-type&quot;))    # &quot;application/json&quot;
+
+# 更加复杂的POST请求: 表单
+post_dict = {&quot;key1&quot;: &quot;value1&quot;, &quot;key2&quot;: &quot;value2&quot;}
+r = requests.post(&quot;http://httpbin.org/post&quot;, data=post_dict)
+print(r.text)
+
+# POST一个多部分编码(Multipart-Encoded)的文件
+files = {&quot;file&quot;: open(&quot;report.xls&quot;, &quot;rb&quot;)}
+r = requests.post(&quot;http://httpbin.org/post&quot;, files=files)
+print(r.text)
+
+# 你可以显式地设置文件名, 文件类型和请求头
+files = {&quot;file&quot;: (&quot;report.xls&quot;, open(&quot;report.xls&quot;, &quot;rb&quot;), &quot;application/vnd.ms-excel&quot;, {&quot;Expires&quot;: &quot;0&quot;})}
+r = requests.post(&quot;http://httpbin.org/post&quot;, files=files)
+print(r.text)
+
+# 你也可以发送文本字符串
+files = {&quot;file&quot;: (&quot;report.csv&quot;, &quot;some,data,to,send\nanother,row,to,send\n&quot;)}
+r = requests.post(&quot;http://httpbin.org/post&quot;, files=files)
+print(r.text)
+
+# 响应状态码
+r = requests.get(&quot;http://httpbin.org/get&quot;)
+print(r.status_code)                            # 200
+print(r.status_code == requests.codes.ok)       # True 响应状态码查询
+
+# 如果发送了一个错误请求(4XX客户端错误, 或5XX服务器错误响应), 可以通过 Response.raise_for_status() 来抛出异常:
+bad_r = requests.get(&quot;http://httpbin.org/status/404&quot;)
+print(bad_r.status_code)                        # 404
+bad_r.raise_for_status()                        # 引发异常
+
+# Cookie: 如果某个响应中包含一些cookie, 则会被放到response.cookies(CookieJar类型)中
+r = requests.get(&quot;http://example.com/some/cookie/setting/url&quot;)
+print(r.cookies[&quot;example_cookie_name&quot;])         # &quot;example_cookie_value&quot;
+
+# 要想发送你的cookies到服务器, 可以使用cookies参数(一个字典)
+cookies = dict(cookies_are=&quot;working&quot;)
+r = requests.get(&quot;http://httpbin.org/cookies&quot;, cookies=cookies)
+print(r.text)
+
+# cookie的其他操作
+# requests.utils.dict_from_cookiejar(cj): Returns a key/value dictionary from a CookieJar.
+# requests.utils.cookiejar_from_dict(cookie_dict, cookiejar=None, overwrite=True): Returns a CookieJar from a key/value dictionary.
+# requests.utils.add_dict_to_cookiejar(cj, cookie_dict): Returns a CookieJar from a key/value dictionary.
+
+# 通用CookieJar类, 一个cookielib.CookieJar, 但是提供一个dict接口
+# class requests.cookies.RequestsCookieJar(policy=None): Compatibility class; is a cookielib.CookieJar, but exposes a dict interface.
+
+# 会话对象: 会话对象让你能够跨请求保持某些参数, 它也会在同一个Session实例发出的所有请求之间保持cookie
+s = requests.Session()
+s.get(&quot;http://httpbin.org/cookies/set/sessioncookie/123456789&quot;)
+s.get(&quot;http://httpbin.org/cookies&quot;)
+for cookie in s.cookies:
+    print(cookie)
+
+# 如果你要手动为会话添加cookie, 就是用Cookie utility函数来操纵Session.cookies
+requests.utils.add_dict_to_cookiejar(s.cookies, {&quot;cookie_key&quot;: &quot;cookie_value&quot;})
+
+# 会话也可用来为请求方法提供缺省数据, 这是通过为会话对象的属性提供数据来实现的
+s.auth = (&quot;user&quot;, &quot;pass&quot;)
+s.headers.update({&quot;x-test&quot;: &quot;true&quot;})
+s.get(&quot;http://httpbin.org/headers&quot;, headers={&quot;x-test2&quot;: &quot;true&quot;})        # both &quot;x-test&quot; and &quot;x-test2&quot; are sent
+
+# 不过需要注意, 就算使用了会话, 方法级别的参数也不会被跨请求保持, 下面的例子只会给第一个请求发送cookie
+s.get(&quot;http://httpbin.org/cookies&quot;, cookies={&quot;from-my&quot;: &quot;browser&quot;})     # 带有cookie
+s.get(&quot;http://httpbin.org/cookies&quot;)                                     # 不带cookie
+
+# 会话还可以用作前后文管理器
+with requests.Session() as s:
+    s.get(&quot;http://httpbin.org/cookies/set/sessioncookie/123456789&quot;)
+# class requests.Session类, 和requests外层有的函数/属性基本一致, 只不过是封装了一层跨域请求的功能
+
+# 重定向与请求历史, 默认情况下, 除了HEAD, Requests会自动处理所有重定向, 可以通过allow_redirects参数禁用重定向处理
+# 可以使用响应对象的history方法来追踪重定向, Response.history 是一个Response对象的列表, 按照从最老到最近的请求进行排序
+r = requests.get(&quot;http://github.com&quot;, allow_redirects=True)
+print(r.status_code)        # 200
+print(r.history)            # [&lt;Response [301]&gt;]
+r = requests.get(&quot;http://github.com&quot;, allow_redirects=False)
+print(r.status_code)        # 301
+print(r.history)            # []
+
+# 超时, 设置timeout参数
+requests.get(&quot;http://github.com&quot;, timeout=0.001)
+# Traceback (most recent call last):
+#   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+# requests.exceptions.Timeout: HTTPConnectionPool(host=&quot;github.com&quot;, port=80): Request timed out. (timeout=0.001)
+
+# 注意: timeout仅对连接过程有效, 与响应体的下载无关
+# timeout并不是整个下载响应的时间限制, 而是如果服务器在timeout秒内没有应答, 将会引发一个异常
+# 更精确地说, 是在timeout秒内没有从基础套接字上接收到任何字节的数据时
+requests.get(&quot;https://github.com&quot;, timeout=5)
+
+# 上边的timeout值将会用作 connect 和 read 二者的timeout, 如果要分别制定, 就传入一个元组
+requests.get(&quot;https://github.com&quot;, timeout=(3.05, 27))
+
+# 错误与异常: 遇到网络问题(如: DNS 查询失败、拒绝连接等)时, Requests 会抛出一个 ConnectionError 异常
+# 如果 HTTP 请求返回了不成功的状态码, Response.raise_for_status() 会抛出一个 HTTPError 异常
+# 若请求超时, 则抛出一个 Timeout 异常
+# 若请求超过了设定的最大重定向次数, 则会抛出一个 TooManyRedirects 异常
+# 所有Requests显式抛出的异常都继承自 requests.exceptions.RequestException
+
+# 所有异常:
+# exception requests.RequestException(*args, **kwargs): There was an ambiguous exception that occurred while handling your request.
+# exception requests.ConnectionError(*args, **kwargs): A Connection error occurred.
+# exception requests.HTTPError(*args, **kwargs): An HTTP error occurred.
+# exception requests.URLRequired(*args, **kwargs): A valid URL is required to make a request.
+# exception requests.TooManyRedirects(*args, **kwargs): Too many redirects.
+# exception requests.ConnectTimeout(*args, **kwargs): The request timed out while trying to connect to the remote server.
+# exception requests.ReadTimeout(*args, **kwargs): The server did not send any data in the allotted amount of time.
+# exception requests.Timeout(*args, **kwargs): The request timed out.
+
+# SSL证书验证, verify设置为True表示检查证书, 设置为False表示忽略证书
+requests.get(&quot;https://kennethreitz.com&quot;, verify=True)       # 未设置SSL证书, 抛出异常
+# requests.exceptions.SSLError: hostname &quot;kennethreitz.com&quot; doesn&quot;t match either of &quot;*.herokuapp.com&quot;, &quot;herokuapp.com&quot;
+requests.get(&quot;https://github.com&quot;, verify=True)             # &lt;Response [200]&gt;, 已设置SSL证书
+# 对于私有证书，你也可以传递一个 CA_BUNDLE 文件的路径给 verify
+
+# 你也可以指定一个本地证书用作客户端证书, 可以是单个文件（包含密钥和证书）或一个包含两个文件路径的元组:
+requests.get(&quot;https://kennethreitz.com&quot;, cert=(&quot;/path/server.crt&quot;, &quot;/path/key&quot;))
+requests.get(&quot;https://kennethreitz.com&quot;, cert=&quot;/wrong_path/server.pem&quot;)
+# SSLError: [Errno 336265225] _ssl.c:347: error:140B0009:SSL routines:SSL_CTX_use_PrivateKey_file:PEM lib
+# 警告: 本地证书的私有 key 必须是解密状态. 目前Requests不支持使用加密的 key
+
+# 流式上传, 允许你发送大的数据流或文件而无需先把它们读入内存
+with open(&quot;massive-body&quot;) as f:
+    requests.post(&quot;http://some.url/streamed&quot;, data=f)
+
+
+# 事件挂钩, 可用的钩子: response(从一个请求产生的响应)
+# 你可以通过传递一个 {hook_name: callback_function} 字典给 hooks 请求参数为每个请求分配一个钩子函数
+def print_url(resp):
+    print(resp.url)
+    return
+requests.get(&quot;http://httpbin.org&quot;, hooks=dict(response=print_url))
+
+# 代理
+proxies = {
+    &quot;http&quot;: &quot;http://10.10.1.10:3128&quot;,
+    &quot;https&quot;: &quot;http://10.10.1.10:1080&quot;,
+}
+requests.get(&quot;http://example.org&quot;, proxies=proxies)
+# 若代理需要使用HTTP Basic Auth, 可以使用http://user:password@host:port/, 比如&quot;http&quot;: &quot;http://user:pass@10.10.1.10:3128/&quot;
+
+# 除了基本的 HTTP 代理, Request 还支持 SOCKS 协议的代理, 此时需要单独安装:
+# $ pip install requests[socks]
+proxies = {
+    &quot;http&quot;: &quot;socks5://user:pass@host:port&quot;,
+    &quot;https&quot;: &quot;socks5://user:pass@host:port&quot;
+}
+requests.get(&quot;http://example.org&quot;, proxies=proxies)
+
+# Requests 传输适配器
+# 从 v1.0.0 以后，Requests 的内部采用了模块化设计。部分原因是为了实现传输适配器（Transport Adapter）。
+# 传输适配器提供了一个机制，让你可以为 HTTP 服务定义交互方法。尤其是它允许你应用服务前的配置。
+# Requests 自带了一个传输适配器，也就是 HTTPAdapter。 这个适配器使用了强大的 urllib3，为 Requests 提供了默认的 HTTP 和 HTTPS 交互。
+# 每当 Session 被初始化，就会有适配器附着在 Session 上，其中一个供 HTTP 使用，另一个供 HTTPS 使用。
+# Request 允许用户创建和使用他们自己的传输适配器，实现他们需要的特殊功能。创建好以后，传输适配器可以被加载到一个会话对象上，附带着一个说明，告诉会话适配器应该应用在哪个 web 服务上。
+s = requests.Session()
+s.mount(&quot;http://baidu.com&quot;, requests.adapters.HTTPAdapter())
+
+# 出现错误: Connection pool is full, discarding connection: xxxx.com
+s.mount(&apos;https://&apos;, requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
+
+# 关闭InsecurePlatformWarning
+# requests.packages.urllib3.disable_warnings()
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/requests-爬虫/" rel="tag"># requests,爬虫</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/23/python/Python 魔法方法详解 - python的学习之路 - CSDN博客.html" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/23/python/python 各种库和其他.html" rel="prev" title="python 各种库和其他">
+                python 各种库和其他 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="bo" />
+          <p class="site-author-name" itemprop="name">bo</p>
+           
+              <p class="site-description motion-element" itemprop="description">宅男</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bolearnpython" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.huxiu.com/" title="虎嗅网" target="_blank">虎嗅网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.infoq.com/cn/" title="InfoQ" target="_blank">InfoQ</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://blog.jobbole.com/" title="伯乐在线" target="_blank">伯乐在线</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.cnblogs.com/" title="博客园" target="_blank">博客园</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#requests"><span class="nav-number">1.</span> <span class="nav-text">requests</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+<div class="theme-info">粤ICP备17025554号-1</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="local-search-pop-overlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("AXBtbvjnaMP2cE34U1CAjLqF-gzGzoHsz", "6CKwM1armacelKCp8mh4StM4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
