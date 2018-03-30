@@ -113,6 +113,7 @@
 <meta property="og:url" content="https://www.xncoding.com/index.html">
 <meta property="og:site_name" content="满天星辰">
 <meta property="og:description" content="宅男">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="满天星辰">
 <meta name="twitter:description" content="宅男">
@@ -132,9 +133,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: 'OFNGCUOLOW',
-      apiKey: '2cd2edac28bf6f65be36c05bdfb1a245',
-      indexName: 'xnindex',
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -322,7 +323,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/装饰器.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/scrapy.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -344,8 +345,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/装饰器.html" itemprop="url">
-                  装饰器
+                <a class="post-title-link" href="/2018/03/30/python/scrapy.html" itemprop="url">
+                  scrapy
                 </a>
               
             
@@ -361,8 +362,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -379,7 +380,7 @@
 
           
           
-             <span id="/2017/10/23/python/装饰器.html" class="leancloud_visitors" data-flag-title="装饰器">
+             <span id="/2018/03/30/python/scrapy.html" class="leancloud_visitors" data-flag-title="scrapy">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,175 +411,215 @@
       
         
           
-            <h1 id="Python-中装饰器的使用"><a href="#Python-中装饰器的使用" class="headerlink" title="Python 中装饰器的使用"></a>Python 中装饰器的使用</h1><p><code>import functools</code></p>
-<h2 id="构建不带参数的装饰器"><a href="#构建不带参数的装饰器" class="headerlink" title="构建不带参数的装饰器"></a>构建不带参数的装饰器</h2><pre><code>def logging(func):
-    @functools.wraps(func)
-    def decorator(*args, **kwargs):
-        print(&quot;%s called&quot; % func.__name__)
-        result = func(*args, **kwargs)
-        print(&quot;%s end&quot; % func.__name__)
-        return result
-    return decorator
+            <h2 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h2><pre><code>scrapy startproject project
+cd project/project/spiders
+scrapy genspider -t crawl spider1 spider1.com
+scrapy crawl myspider -s LOG_FILE=scrapy.log
+scrapy shell &lt;url&gt;
+scrapy check -l
+scrapy list
+scrapy edit &lt;spider&gt;
+scrapy view &lt;url&gt;
+scrapy parse &lt;url&gt; [options]
+    --spider=SPIDER: 跳过自动检测spider并强制使用特定的spider
+    --a NAME=VALUE: 设置spider的参数(可能被重复)
+    --callback or -c: spider中用于解析返回(response)的回调函数
+    --pipelines: 在pipeline中处理item
+    --rules or -r: 使用 CrawlSpider 规则来发现用来解析返回(response)的回调函数
+    --noitems: 不显示爬取到的item
+    --nolinks: 不显示提取到的链接
+    --nocolour: 避免使用pygments对输出着色
+    --depth or -d: 指定跟进链接请求的层次数(默认: 1)
+    --verbose or -v: 显示每个请求的详细信息
+scrapy settings --get DOWNLOAD_DELAY
+scrapy runspider myspider.py
+scrapy bench
+</code></pre><h2 id="response-request"><a href="#response-request" class="headerlink" title="response-request"></a>response-request</h2><pre><code>FormRequest(url=&apos;http://www.viajanet.com.br/busca/resources/api/AvailabilityStatusAsync&apos;,formdata={})
+request.meta[&apos;proxy&apos;] = &quot;http://{}:{}@{}:{}&quot;.format(user,pass,&apos;127.0.0.1&apos;,&apos;8118&apos;)
+meta = {&apos;dont_redirect&apos;: True,&apos;handle_httpstatus_list&apos;: [301,302]}
+dont_redirect
+dont_filter
+priority #此请求的优先级
+dont_retry
+handle_httpstatus_list
+dont_merge_cookies
+cookiejar
+redirect_urls
+bindaddress
+dont_obey_robotstxt
+download_timeout
+</code></pre><h2 id="LinkExtractor"><a href="#LinkExtractor" class="headerlink" title="LinkExtractor"></a>LinkExtractor</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">LinkExtractor(allow=(), deny=(), allow_domains=(), deny_domains=(), restrict_xpaths=(), tags=(&apos;a&apos;, &apos;area&apos;), attrs=(&apos;href&apos;,), canonicalize=False, unique=True, process_value=None, deny_extensions=None, restrict_css=(), strip=True)</div><div class="line">allow (a regular expression (or list of))   – 必须要匹配这个正则表达式(或正则表达式列表)的URL才会被提取｡如果没有给出(或为空), 它会匹配所有的链接｡</div><div class="line">deny (a regular expression (or list of))    – 与这个正则表达式(或正则表达式列表)的(绝对)不匹配的URL必须被排除在外(即不提取)｡它的优先级高于 allow 的参数｡如果没有给出(或None), 将不排除任何链接｡</div><div class="line">allow_domains (str or list)                 – 单值或者包含字符串域的列表表示会被提取的链接的domains｡</div><div class="line">deny_domains (str or list)                  – 单值或包含域名的字符串,将不考虑提取链接的domains｡</div><div class="line">deny_extensions (list)                      – 应提取链接时,可以忽略扩展名的列表｡如果没有给出, 它会默认为 scrapy.linkextractor 模块中定义的 IGNORED_EXTENSIONS 列表｡</div><div class="line">restrict_xpaths (str or list)               – 一个的XPath (或XPath的列表),它定义了链路应该从提取的响应内的区域｡如果给定的,只有那些XPath的选择的文本将被扫描的链接｡见下面的例子｡</div><div class="line">tags (str or list)                          – 提取链接时要考虑的标记或标记列表｡默认为 ( &apos;a&apos; , &apos;area&apos;) ｡</div><div class="line">attrs (list)                                – 提取链接时应该寻找的attrbitues列表(仅在 tag 参数中指定的标签)｡默认为 (&apos;href&apos;)｡</div><div class="line">canonicalize (boolean)                      – 规范化每次提取的URL(使用scrapy.utils.url.canonicalize_url )｡默认为 True ｡</div><div class="line">unique (boolean)                            – 重复过滤是否应适用于提取的链接｡</div><div class="line">process_value (callable)                    – 它接收来自扫描标签和属性提取每个值, 可以修改该值, 并返回一个新的, 或返回 None 完全忽略链接的功能｡如果没有给出, process_value 默认是 lambda x: x</div><div class="line">def process_value(value):</div><div class="line">    m = re.search(&quot;javascript:goToPage\(&apos;(.*?)&apos;&quot;, value)</div><div class="line">    if m:</div><div class="line">        return m.group(1)</div><div class="line">Rule(link_extractor, callback=None, cb_kwargs=None, follow=None, process_links=None, process_request=None)</div><div class="line">cb_kwargs 包含传递给回调函数的参数(keyword argument)的字典。</div><div class="line">follow 是一个布尔(boolean)值，指定了根据该规则从response提取的链接是否需要跟进。 如果 callback 为None， follow 默认设置为 True ，否则默认为 False 。</div><div class="line">process_links 是一个callable或string(该spider中同名的函数将会被调用)。 从link_extractor中获取到链接列表时将会调用该函数。该方法主要用来过滤。</div><div class="line">process_request 是一个callable或string(该spider中同名的函数将会被调用)。 该规则提取到每个request时都会调用该函数。该函数必须返回一个request或者None。 (用来过滤request)</div></pre></td></tr></table></figure>
+<h2 id="内存使用扩展-Memory-usage-extension"><a href="#内存使用扩展-Memory-usage-extension" class="headerlink" title="内存使用扩展(Memory usage extension)"></a>内存使用扩展(Memory usage extension)</h2><pre><code>MEMDEBUG_ENABLED=False
+是否启用内存调试(memory debugging)
+MEMDEBUG_NOTIFY=[]
+如果该设置不为空like:[&apos;user@example.com&apos;]，当启用内存调试时将会发送一份内存报告到指定的地址；否则该报告将写到log中
+MEMUSAGE_LIMIT_MB=0
+在关闭Scrapy之前所允许的最大内存数
+MEMUSAGE_REPORT=False
+每个spider被关闭时是否发送内存使用报告。
+MEMUSAGE_WARNING_MB=0
+在发送警告email前所允许的最大内存数
+</code></pre><h2 id="关闭spider扩展"><a href="#关闭spider扩展" class="headerlink" title="关闭spider扩展"></a>关闭spider扩展</h2><pre><code>CLOSESPIDER_TIMEOUT = 82800
+CLOSESPIDER_ITEMCOUNT
+CLOSESPIDER_PAGECOUNT
+CLOSESPIDER_ERRORCOUNT
+</code></pre><h2 id="关闭spider"><a href="#关闭spider" class="headerlink" title="## 关闭spider"></a>## 关闭spider</h2><pre><code>scrapy.exceptions.CloseSpider(reason=&apos;cancelled&apos;)
+def parse_page(self, response):
+    if &apos;Bandwidth exceeded&apos; in response.body:
+        raise CloseSpider(&apos;bandwidth_exceeded&apos;)
+</code></pre><h2 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h2><pre><code>from scrapy.mail import MailSender
+mailer = MailSender()
+或
+mailer = MailSender.from_settings(settings)
+</code></pre><h2 id="发送email"><a href="#发送email" class="headerlink" title="发送email"></a>发送email</h2><pre><code>mailer.send(to=[&quot;someone@example.com&quot;], subject=&quot;Some subject&quot;, body=&quot;Some body&quot;, cc=[&quot;another@example.com&quot;])
+MAIL_FROM=&apos;scrapy@localhost&apos;
+用于发送email的地址(address)(填入 ``From:``) 。
+MAIL_HOST=&apos;localhost&apos;
+发用邮件的SMTP主机
+MAIL_PORT=25
+发用邮件的SMTP端口
+MAIL_USER=None
+MAIL_PASS=None
+用于SMTP认证，与 :setting:`MAIL_USER` 配套的密码。
+MAIL_TLS=False
+强制使用STARTTLS。STARTTLS能使得在已经存在的不安全连接上，通过使用SSL/TLS来实现安全连接。
+MAIL_SSL=False
+强制使用SSL加密连接。
+</code></pre><h2 id="单spider追踪多cookie-session"><a href="#单spider追踪多cookie-session" class="headerlink" title="单spider追踪多cookie session"></a>单spider追踪多cookie session</h2><pre><code>for i, url in enumerate(urls):
+    yield scrapy.Request(&quot;http://www.example.com&quot;, meta={&apos;cookiejar&apos;: i},
+        callback=self.parse_page)
+def parse_page(self, response):
+    return scrapy.Request(&quot;http://www.example.com/otherpage&quot;,
+        meta={&apos;cookiejar&apos;: response.meta[&apos;cookiejar&apos;]},
+        callback=self.parse_other_page)
+</code></pre><h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><pre><code>Dummy策略(默认值)
+RFC2616策略
+HTTPCACHE_ENABLED = False
+HTTPCACHE_DIR = &apos;httpcache&apos;
+HTTPCACHE_IGNORE_MISSING = False
+HTTPCACHE_STORAGE = &apos;scrapy.extensions.httpcache.FilesystemCacheStorage&apos;
+HTTPCACHE_EXPIRATION_SECS = 0
+HTTPCACHE_ALWAYS_STORE = False
+HTTPCACHE_IGNORE_HTTP_CODES = []
+HTTPCACHE_IGNORE_SCHEMES = [&apos;file&apos;]
+HTTPCACHE_IGNORE_RESPONSE_CACHE_CONTROLS = []
+HTTPCACHE_DBM_MODULE = &apos;anydbm&apos; if six.PY2 else &apos;dbm&apos;
+HTTPCACHE_POLICY = &apos;scrapy.extensions.httpcache.DummyPolicy&apos;
+HTTPCACHE_GZIP = False
+</code></pre><h3 id="增加全局并发数"><a href="#增加全局并发数" class="headerlink" title="增加全局并发数::"></a>增加全局并发数::</h3><pre><code>CONCURRENT_REQUESTS = 100
+Item Processor(即 Item Pipeline) 同时处理(每个response的)item的最大值。
+CONCURRENT_ITEMS = 100
+Scrapy downloader 并发请求(concurrent requests)的最大值。
+CONCURRENT_REQUESTS = 16
+对单个网站进行并发请求的最大值。
+CONCURRENT_REQUESTS_PER_DOMAIN = 8
+对单个IP进行并发请求的最大值。如果非0，则忽略 CONCURRENT_REQUESTS_PER_DOMAIN 设定， 使用该设定。 也就是说，并发限制将针对IP，而不是网站。
+该设定也影响 DOWNLOAD_DELAY: 如果 CONCURRENT_REQUESTS_PER_IP 非0，下载延迟应用在IP而不是网站上。
+CONCURRENT_REQUESTS_PER_IP = 0
+</code></pre><h3 id="设置Log级别"><a href="#设置Log级别" class="headerlink" title="设置Log级别:"></a>设置Log级别:</h3><pre><code>LOG_ENABLED = true
+LOG_ENCODING = &quot;utf-8&quot;
+LOG_FILE = &quot;log/spider.log&quot;
+LOG_FORMAT = &quot;%(asctime)s [%(name)s] %(levelname)s: %(message)s&quot;
+LOG_DATEFORMAT = &quot;%Y-%m-%d %H:%M:%S&quot;
+LOG_LEVEL = &apos;INFO&apos;#默认&apos;debug&apos;
+LOG_ENCODING#logging使用的编码
+LOG_STDOUT  #为 ``True``,进程所有的标准输出(及错误)将会被重定向到log中
+#spider
+self.logger.info(&apos;Parse function called on %s&apos;, response.url)
+自定义logger
+import logging
+logger = logging.getLogger(&apos;zhangsan&apos;)
+logger.info(&apos;Parse function called on %s&apos;, response.url)
+</code></pre><h3 id="禁止cookies"><a href="#禁止cookies" class="headerlink" title="禁止cookies::"></a>禁止cookies::</h3><pre><code>COOKIES_ENABLED = False
+COOKIES_DEBUG
+</code></pre><h3 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h3><pre><code>DOWNLOAD_TIMEOUT = 10      # 3mins
+</code></pre><h3 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h3><pre><code>ROBOTSTXT_OBEY = False
+</code></pre><h3 id="爬取URL的最大长度"><a href="#爬取URL的最大长度" class="headerlink" title="爬取URL的最大长度"></a>爬取URL的最大长度</h3><pre><code>URLLENGTH_LIMIT = 2083
+</code></pre><h3 id="禁止重试"><a href="#禁止重试" class="headerlink" title="禁止重试::"></a>禁止重试::</h3><pre><code>RETRY_ENABLED = False
+RETRY_TIMES=2
+RETRY_HTTP_CODES=[500, 502, 503, 504, 400, 408]
+[500, 503, 504, 400, 403, 404, 408]
+</code></pre><h3 id="关闭重定向"><a href="#关闭重定向" class="headerlink" title="关闭重定向::"></a>关闭重定向::</h3><pre><code>REDIRECT_ENABLED = False
+REDIRECT_MAX_TIMES=20
+单个request被重定向的最大次数。
+REDIRECT_MAX_METAREFRESH_DELAY=100
+有些网站使用 meta-refresh 重定向到session超时页面，
+因此我们限制自动重定向到最大延迟(秒)。
+REDIRECT_PRIORITY_ADJUST
+默认: ``+2``
+修改重定向请求相对于原始请求的优先级。
+负数意味着更多优先级。
+</code></pre><h3 id="自动限速"><a href="#自动限速" class="headerlink" title="自动限速"></a>自动限速</h3><pre><code>AUTOTHROTTLE_ENABLED=False
+AUTOTHROTTLE_START_DELAY=5.0
+AUTOTHROTTLE_MAX_DELAY=60
+AUTOTHROTTLE_DEBUG=False
+</code></pre><h3 id="depth防止死循环"><a href="#depth防止死循环" class="headerlink" title="depth防止死循环"></a>depth防止死循环</h3><pre><code>爬取网站最大允许的深度(depth)值。如果为0，则没有限制。
+DEPTH_LIMIT = 0
+整数值。用于根据深度调整request优先级。
+如果为0，则不根据深度进行优先级调整。
+DEPTH_PRIORITY = 0
+</code></pre><h3 id="广度优先顺序"><a href="#广度优先顺序" class="headerlink" title="广度优先顺序"></a>广度优先顺序</h3><pre><code>DEPTH_PRIORITY = 1
+SCHEDULER_DISK_QUEUE = &apos;scrapy.squeue.PickleFifoDiskQueue&apos;
+SCHEDULER_MEMORY_QUEUE = &apos;scrapy.squeue.FifoMemoryQueue&apos;
+</code></pre><h3 id="error"><a href="#error" class="headerlink" title="error"></a>error</h3><pre><code>HTTPERROR_ALLOWED_CODES=[]
+忽略该列表中所有非200状态码的response。
+HTTPERROR_ALLOW_ALL=Flase
+忽略所有response，不管其状态值。
+</code></pre><h3 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h3><pre><code>TELNETCONSOLE_ENABLED=True
+telnet 终端是否启用。
+TELNETCONSOLE_PORT
+默认: ``[6023, 6073]``
+</code></pre><h3 id="EDITOR"><a href="#EDITOR" class="headerlink" title="EDITOR"></a>EDITOR</h3><pre><code>默认: depends on the environment
+执行 edit 命令编辑spider时使用的编辑器。 其默认为 EDITOR 环境变量。如果该变量未设置，其默认为 vi (Unix系统) 或者 IDLE编辑器(Windows)。
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">USER_AGENT = &apos;Scrapy/&apos;</div><div class="line">DEFAULT_REQUEST_HEADERS = &#123;</div><div class="line">    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&apos;,</div><div class="line">    &apos;Accept-Language&apos;: &apos;en&apos;,</div><div class="line">&#125;</div><div class="line">ITEM_PIPELINES = &#123;</div><div class="line">   &apos;mybot.pipelines.validate.ValidateMyItem&apos;: 300,</div><div class="line">   &apos;mybot.pipelines.validate.StoreMyItem&apos;: 800,</div><div class="line">&#125;</div><div class="line">将原先的配置进行覆盖</div><div class="line">class MySpider(scrapy.Spider):</div><div class="line">    name = &apos;myspider&apos;</div><div class="line">    custom_settings = &#123;</div><div class="line">        &apos;DOWNLOAD_DELAY&apos;: 1,</div><div class="line">        &apos;RANDOMIZE_DOWNLOAD_DELAY&apos;: False,</div><div class="line">        &apos;CONCURRENT_REQUESTS_PER_IP&apos;: 1,</div><div class="line">    &#125;</div><div class="line"></div><div class="line">class MyExtension(object):</div><div class="line">    @classmethod</div><div class="line">    def from_crawler(cls, crawler):</div><div class="line">        settings = crawler.settings</div><div class="line">        if settings[&apos;LOG_ENABLED&apos;]:</div><div class="line">            print &quot;log is enabled!&quot;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">DNSCACHE_ENABLED</div><div class="line">默认: ``True``</div><div class="line">DUPEFILTER_CLASS</div><div class="line">默认: ``&apos;scrapy.dupefilter.RFPDupeFilter&apos;``</div><div class="line">DUPEFILTER_DEBUG</div><div class="line">默认: ``False``</div><div class="line">SCHEDULER</div><div class="line">默认: ``&apos;scrapy.core.scheduler.Scheduler&apos;``</div></pre></td></tr></table></figure>
+<h2 id="scrapyd"><a href="#scrapyd" class="headerlink" title="scrapyd"></a>scrapyd</h2><pre><code>pip install scrapyd-client
+拷贝scrapyd-deploy工具到爬虫目录下
+Ubuntu/Windows:
+[deploy:tutorial_deploy]
+url = http://192.168.17.129:6800/
+project = tutorial
+username = enlong
+password = test
+Windows:
+    python c:\Python27\Scripts\scrapyd-deploy
+Ubuntu:
+    scrapyd-deploy tutorial_deploy -p tutorial
+python scrapyd-deploy -l
+scrapyd-deploy &lt;target&gt; -p &lt;project&gt; --version &lt;version&gt;
+python scrapyd-deploy 127 -p projectccp --version ver20160702
 
 
-# 使用装饰器
-@logging
-def test01(a, b):
-    print(&quot;in function test01, a=%s, b=%s&quot; % (a, b))
-    return 1
 
-# 使用装饰器
-@logging
-def test02(a, b, c=1):
-    print(&quot;in function test02, a=%s, b=%s, c=%s&quot; % (a, b, c))
-    return 1
-</code></pre><h2 id="构建带参数的装饰器"><a href="#构建带参数的装饰器" class="headerlink" title="构建带参数的装饰器"></a>构建带参数的装饰器</h2><pre><code>def params_chack(*types, **kwtypes):
-    def _outer(func):
-        @functools.wraps(func)
-        def _inner(*args, **kwargs):
-            result = [isinstance(_param, _type) for _param, _type in zip(args, types)]
-            assert all(result), &quot;params_chack: invalid parameters&quot;
-            result = [isinstance(kwargs[_param], kwtypes[_param]) for _param in kwargs if _param in kwtypes]
-            assert all(result), &quot;params_chack: invalid parameters&quot;
-            return func(*args, **kwargs)
-        return _inner
-    return _outer
-
-
-# 使用装饰器
-@params_chack(int, (list, tuple))
-def test03(a, b):
-    print(&quot;in function test03, a=%s, b=%s&quot; % (a, b))
-    return 1
-
-
-# 使用装饰器
-@params_chack(int, str, c=(int, str))
-def test04(a, b, c):
-    print(&quot;in function test04, a=%s, b=%s, c=%s&quot; % (a, b, c))
-    return 1
-
-
-## 在类的成员方法中使用装饰器
-class ATest(object):
-    @params_chack(object, int, str)
-    def test(self, a, b):
-        print(&quot;in function test of ATest, a=%s, b=%s&quot; % (a, b))
-        return 1
-
-
-# 同时使用多个装饰器
-@logging
-@params_chack(int, str, (list, tuple))
-def test05(a, b, c):
-    print(&quot;in function test05, a=%s, b=%s, c=%s&quot; % (a, b, c))
-    return 1
-</code></pre><h2 id="构建不带参数的装饰器类"><a href="#构建不带参数的装饰器类" class="headerlink" title="构建不带参数的装饰器类"></a>构建不带参数的装饰器类</h2><pre><code>class Decorator(object):
-
-    def __init__(self, func):
-        self.func = func
-        return
-
-    def __call__(self, *args, **kwargs):
-        print(&quot;%s called&quot; % self.func.__name__)
-        result = self.func(*args, **kwargs)
-        print(&quot;%s end&quot; % self.func.__name__)
-        return result
-
-
-# 使用装饰器
-@Decorator
-def test06(a, b, c):
-    print(&quot;in function test06, a=%s, b=%s, c=%s&quot; % (a, b, c))
-    return 1
-</code></pre><h2 id="构建带参数的装饰器类"><a href="#构建带参数的装饰器类" class="headerlink" title="构建带参数的装饰器类"></a>构建带参数的装饰器类</h2><pre><code>class ParamCheck(object):
-
-    def __init__(self, *types, **kwtypes):
-        self.types = types
-        self.kwtypes = kwtypes
-        return
-
-    def __call__(self, func):
-        @functools.wraps(func)
-        def _inner(*args, **kwargs):
-            result = [isinstance(_param, _type) for _param, _type in zip(args, self.types)]
-            assert all(result), &quot;params_chack: invalid parameters&quot;
-            result = [isinstance(kwargs[_param], self.kwtypes[_param]) for _param in kwargs if _param in self.kwtypes]
-            assert all(result), &quot;params_chack: invalid parameters&quot;
-            return func(*args, **kwargs)
-        return _inner
-
-
-# 使用装饰器
-@ParamCheck(int, str, (list, tuple))
-def test07(a, b, c):
-    print(&quot;in function test06, a=%s, b=%s, c=%s&quot; % (a, b, c))
-    return 1
-</code></pre><p>##例子</p>
-<h3 id="装饰器实例-函数缓存"><a href="#装饰器实例-函数缓存" class="headerlink" title="装饰器实例: 函数缓存"></a>装饰器实例: 函数缓存</h3><pre><code>def funccache(func):
-    cache = {}
-
-    @functools.wraps(func)
-    def _inner(*args):
-        if args not in cache:
-            cache[args] = func(*args)
-        return cache[args]
-    return _inner
-
-
-# 使用装饰器
-@funccache
-def test08(a, b, c):
-    # 其他复杂或耗时计算
-    return a + b + c
-</code></pre><h3 id="使用Python自带的装饰器-property"><a href="#使用Python自带的装饰器-property" class="headerlink" title="使用Python自带的装饰器 @property"></a>使用Python自带的装饰器 @property</h3><pre><code>class People(object):
-
-    def __init__(self):
-        self._name = None
-        self._age = None
-        return
-
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        self._name = name
-        return
-
-    @property
-    def age(self):
-        return self._age
-
-    @age.setter
-    def age(self, age):
-        assert 0 &lt; age &lt; 120
-        self._age = age
-        return
-</code></pre><h3 id="类静态方法和类方法"><a href="#类静态方法和类方法" class="headerlink" title="类静态方法和类方法"></a>类静态方法和类方法</h3><pre><code>class Date(object):
-    &quot;&quot;&quot;docstring for Date&quot;&quot;&quot;
-    __slots__ = (&apos;year&apos;,&apos;month&apos;,&apos;day&apos;)
-    def __init__(self, year=0,month=0,day=0):
-        self.year = year
-        self.month = month
-        self.day = day
-
-    @property
-    def time(self):
-        return &apos;{}-{}-{}&apos;.format(self.year,self.month,self.day)
-
-    @classmethod
-    def time_from_string(cls,string):
-        year,month,day=string.split(&apos;-&apos;)
-        date = cls(year,month,day)
-        return date
-
-    @staticmethod
-    def check_time(year,month,day):
-        year,month,day = map(int,[year,month,day])
-        if 1970&lt;year&lt;2018 and 0&lt;month&lt;13 and 0&lt;day&lt;32:
-            return year, month, day
+1、获取状态
+http://127.0.0.1:6800/daemonstatus.json
+2、获取项目列表
+http://127.0.0.1:6800/listprojects.json
+3、获取项目下已发布的爬虫列表
+http://127.0.0.1:6800/listspiders.json?project=myproject
+4、获取项目下已发布的爬虫版本列表
+http://127.0.0.1:6800/listversions.json?project=myproject
+5、获取爬虫运行状态
+http://127.0.0.1:6800/listjobs.json?project=myproject
+6、启动服务器上某一爬虫（必须是已发布到服务器的爬虫）
+http://localhost:6800/schedule.json （post方式，data={&quot;project&quot;:myproject,&quot;spider&quot;:myspider}）
+7、删除某一版本爬虫
+http://127.0.0.1:6800/delversion.json （post方式，data={&quot;project&quot;:myproject,&quot;version&quot;:myversion}）
+8、删除某一工程，包括该工程下的各版本爬虫
+http://127.0.0.1:6800/delproject.json（post方式，data={&quot;project&quot;:myproject}）
+</code></pre><h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><pre><code>TypeError
+表现形式:TypeError: ‘float’ object is not iterable
+相关搜索:https://github.com/scrapy/scrapy/issues/2461
+解决方法:sudo pip install -U Twisted==16.6.0
+ERROR: Unable to read the instance data ,giving up
+表现形式: 直接error 报错，拿不到数据
+相关搜索: 无
+解决方法: 回调函数中，必须返回 Request 对象 或者Item对象 ，可以直接返回这种类型的数据就可以了
+Library not loaded: /opt/local/lib/libssl.1.0.0.dylib (LoadError)
+解决方法: brew remove openssl 先卸载，然后 brew install openssl
+unknown command: crawl error
+表现形式: 无法使用crawl 命令
+相关搜索 : unknown-command-crawl-error
+解决方法 : 切换到有scrapy.cfg文件下，然后使用命令
 </code></pre>
           
         
@@ -619,7 +660,7 @@ def test08(a, b, c):
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/Python 多进程与多线程.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/selenium.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -641,8 +682,8 @@ def test08(a, b, c):
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/Python 多进程与多线程.html" itemprop="url">
-                  Python 多进程与多线程
+                <a class="post-title-link" href="/2018/03/30/python/selenium.html" itemprop="url">
+                  selenium
                 </a>
               
             
@@ -658,8 +699,8 @@ def test08(a, b, c):
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -676,7 +717,7 @@ def test08(a, b, c):
 
           
           
-             <span id="/2017/10/23/python/Python 多进程与多线程.html" class="leancloud_visitors" data-flag-title="Python 多进程与多线程">
+             <span id="/2018/03/30/python/selenium.html" class="leancloud_visitors" data-flag-title="selenium">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -707,8 +748,16 @@ def test08(a, b, c):
       
         
           
-            <h1 id="Python-多进程与多线程"><a href="#Python-多进程与多线程" class="headerlink" title="Python 多进程与多线程"></a>Python 多进程与多线程</h1><h2 id="concurrent"><a href="#concurrent" class="headerlink" title="concurrent"></a>concurrent</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import concurrent                   #进程ProcessPoolExecutor</div><div class="line"></div><div class="line">def func(nb):</div><div class="line">    print(str(nb))</div><div class="line">with concurrent.futures.ThreadPoolExecutor(10) as executor:</div><div class="line">    for arg in list(range(99)):</div><div class="line">        executor.submit(func, arg)</div></pre></td></tr></table></figure>
-<h2 id="tomorrow"><a href="#tomorrow" class="headerlink" title="tomorrow"></a>tomorrow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from  tomorrow import threads</div><div class="line"></div><div class="line">@threads(10)</div><div class="line">def func(nb):</div><div class="line">    print(str(nb))</div><div class="line">for i in range(99):</div><div class="line">    func(i)</div></pre></td></tr></table></figure>
+            <h1 id="selenium"><a href="#selenium" class="headerlink" title="selenium"></a>selenium</h1><h2 id="–隐式等待"><a href="#–隐式等待" class="headerlink" title="–隐式等待"></a>–隐式等待</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">driver.implicitly_wait(5)</div><div class="line">driver.save_screenshot(&apos;e:\screenshot.png&apos;)</div><div class="line">driver.set_page_load_timeout(10)</div><div class="line">driver.set_script_timeout(10)</div><div class="line">text = driver.page_source</div><div class="line">COOKIES_ENABLES = False</div><div class="line">driver.close()</div><div class="line">driver.quit()</div></pre></td></tr></table></figure>
+<h2 id="–多层框架或窗口的定位："><a href="#–多层框架或窗口的定位：" class="headerlink" title="–多层框架或窗口的定位："></a>–多层框架或窗口的定位：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">switch_to_frame()</div><div class="line">switch_to_window()</div><div class="line">driver.switch_to_frame(driver.find_element_by_id``(&quot;topmenuFrame&quot;))</div><div class="line">driver.switch_to_default_content()</div><div class="line">· text  获取该元素的文本</div><div class="line">· submit  提交表单</div><div class="line">· get_attribute  获得属性值</div><div class="line"># --处理下拉框</div><div class="line">switch_to_alert()</div><div class="line">accept()</div></pre></td></tr></table></figure>
+<h2 id="–find"><a href="#–find" class="headerlink" title="–find"></a>–find</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">find_element_by_id</div><div class="line">find_element_by_name</div><div class="line">find_element_by_xpath</div><div class="line">find_element_by_link_text</div><div class="line">find_element_by_partial_link_text</div><div class="line">find_element_by_tag_name</div><div class="line">find_element_by_class_name</div><div class="line">find_element_by_css_selector</div></pre></td></tr></table></figure>
+<h2 id="–cookies"><a href="#–cookies" class="headerlink" title="–cookies"></a>–cookies</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cookie = [item[&quot;name&quot;] + &quot;=&quot; + item[&quot;value&quot;] for item in driver.get_cookies()]</div><div class="line">cookiestr = &apos;;&apos;.join(item for item in cookie)</div><div class="line">driver.get_cookies（）   获得cookie信息</div><div class="line">add_cookie(cookie_dict)  向cookie添加会话信息</div><div class="line">delete_cookie(name)      删除特定(部分)的cookie</div><div class="line">delete_all_cookies()     删除所有cookie</div></pre></td></tr></table></figure>
+<h2 id="–input"><a href="#–input" class="headerlink" title="–input"></a>–input</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from selenium.webdriver.common.keys import Keys</div><div class="line">elem = driver.find_element_by_name(&quot;q&quot;)</div><div class="line">elem.clear()</div><div class="line">elem.send_keys(&quot;python&quot;)</div><div class="line"># click</div><div class="line">click()</div><div class="line">context_click()  右击</div><div class="line">double_click()   双击</div><div class="line">drag_and_drop()  拖动</div></pre></td></tr></table></figure>
+<h2 id="–phantomjs"><a href="#–phantomjs" class="headerlink" title="–phantomjs"></a>–phantomjs</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">from selenium import webdriver</div><div class="line">from selenium.webdriver.common.desired_capabilities import DesiredCapabilities</div><div class="line">service_args = []</div><div class="line">service_args.append(&apos;--load-images=no&apos;)  # 关闭图片加载</div><div class="line">service_args.append(&apos;--disk-cache=yes&apos;)  # 开启缓存</div><div class="line">service_args.append(&apos;--ignore-ssl-errors=true&apos;)  # 忽略https错误</div><div class="line">dcap = dict(DesiredCapabilities.PHANTOMJS)</div><div class="line"># 从USER_AGENTS列表中随机选一个浏览器头，伪装浏览器</div><div class="line">dcap[&quot;phantomjs.page.settings&quot;] = (</div><div class="line">    &#123;&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Linux; Android 4.4.2; en-us; SAMSUNG SCH-I545 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/1.5 Chrome/28.0.1500.94 Mobile Safari/537.36&quot;&#125;)</div><div class="line"># 不载入图片，爬页面速度会快很多</div><div class="line">dcap[&quot;phantomjs.page.settings.loadImages&quot;] = False</div><div class="line">driver = webdriver.PhantomJS(</div><div class="line">    desired_capabilities=dcap, service_args=service_args)</div><div class="line">driver.get_screenshot_as_file(&apos;01.png&apos;)</div><div class="line">driver.quit()</div></pre></td></tr></table></figure>
+<h2 id="–调用js"><a href="#–调用js" class="headerlink" title="–调用js"></a>–调用js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">driver.execute_async_script(js)</div><div class="line">driver.execute_script(js)</div></pre></td></tr></table></figure>
+<h1 id="service-args"><a href="#service-args" class="headerlink" title="service_args"></a>service_args</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">–user - data - dir =”[PATH]” 指定用户文件夹User Data路径，可以把书签这样的用户数据保存在系统分区以外的分区。</div><div class="line">–disk - cache - dir =”[PATH]“ 指定缓存Cache路径</div><div class="line">–disk - cache - size = 指定Cache大小，单位Byte</div><div class="line">–first run 重置到初始状态，第一次运行</div><div class="line">–incognito 隐身模式启动</div><div class="line">–disable - javascript 禁用Javascript</div><div class="line">--omnibox - popup - count = &quot;num&quot; 将地址栏弹出的提示菜单数量改为num个。我都改为15个了。</div><div class="line">--user - agent = &quot;xxxxxxxx&quot; 修改HTTP请求头部的Agent字符串，可以通过about: version页面查看修改效果</div><div class="line">--disable - plugins 禁止加载所有插件，可以增加速度。可以通过about: plugins页面查看效果</div><div class="line">--disable - javascript 禁用JavaScript，如果觉得速度慢在加上这个</div><div class="line">--disable - java 禁用java</div><div class="line">--start - maximized 启动就最大化</div><div class="line">--no - sandbox 取消沙盒模式</div><div class="line">--single - process 单进程运行</div><div class="line">--process - per - tab 每个标签使用单独进程</div><div class="line">--process - per - site 每个站点使用单独进程</div><div class="line">--in-process - plugins 插件不启用单独进程</div><div class="line">--disable - popup - blocking 禁用弹出拦截</div><div class="line">--disable - plugins 禁用插件</div><div class="line">--disable - images 禁用图像</div><div class="line">--incognito 启动进入隐身模式</div><div class="line">--enable - udd - profiles 启用账户切换菜单</div><div class="line">--proxy - pac - url 使用pac代理[via 1 / 2]</div><div class="line">--lang = zh - CN 设置语言为简体中文</div><div class="line">--disk - cache - dir 自定义缓存目录</div><div class="line">--disk - cache - size 自定义缓存最大值（单位byte）</div><div class="line">--media - cache - size 自定义多媒体缓存最大值（单位byte）</div><div class="line">--bookmark - menu 在工具 栏增加一个书签按钮</div><div class="line">--enable - sync 启用书签同步</div></pre></td></tr></table></figure>
+<h2 id="chrome"><a href="#chrome" class="headerlink" title="chrome"></a>chrome</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">from selenium import webdriver</div><div class="line"># 进入浏览器设置</div><div class="line">options = webdriver.ChromeOptions()</div><div class="line"># 设置中文</div><div class="line">options.add_argument(&apos;lang=zh_CN.UTF-8&apos;)</div><div class="line">chrome_options = webdriver.ChromeOptions()</div><div class="line">chrome_options.add_argument(&apos;--headless&apos;)</div><div class="line">chrome_options.add_argument(&apos;--disable-gpu&apos;)</div><div class="line"># 更换头部</div><div class="line">options.add_argument(</div><div class="line">    &apos;user-agent=&quot;Mozilla/5.0 (iPod; U; CPU iPhone OS 2_1 like Mac OS X; ja-jp) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5F137 Safari/525.20&quot;&apos;)</div><div class="line"># 代理</div><div class="line">service_args = [&apos;--proxy=94.182.202.165:8080&apos;, &apos;--proxy-type=http&apos;]</div><div class="line">option.add_argument(&apos;--start-maximized&apos;)  # 最大化</div><div class="line">option.add_argument(&apos;--user-data-dir=E:\\Chrome\\User Data&apos;)  # 设置成用户自己的数据目录</div><div class="line">browser = webdriver.Chrome(executable_path=&apos;E:\\Chrome\\chromedriver.exe&apos;,</div><div class="line">                           chrome_options=options, service_args=service_args)</div><div class="line">url = &quot;https://httpbin.org/get?show_env=1&quot;</div><div class="line">browser.get(url)</div><div class="line">input(&quot;查看效果&quot;)</div><div class="line">browser.quit()</div><div class="line"># -chrome some crx</div><div class="line">option.add_argument(&apos;--user-agent=iphone&apos;)</div><div class="line">option.add_extension(&apos;d:\crx\AdBlock_v2.17.crx&apos;)</div></pre></td></tr></table></figure>
+
           
         
       
@@ -748,7 +797,7 @@ def test08(a, b, c):
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/python加解密.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/抓取动态网站.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -770,8 +819,8 @@ def test08(a, b, c):
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/python加解密.html" itemprop="url">
-                  python加解密
+                <a class="post-title-link" href="/2018/03/30/python/抓取动态网站.html" itemprop="url">
+                  抓取动态网站
                 </a>
               
             
@@ -787,8 +836,8 @@ def test08(a, b, c):
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -805,7 +854,7 @@ def test08(a, b, c):
 
           
           
-             <span id="/2017/10/23/python/python加解密.html" class="leancloud_visitors" data-flag-title="python加解密">
+             <span id="/2018/03/30/python/抓取动态网站.html" class="leancloud_visitors" data-flag-title="抓取动态网站">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -836,78 +885,248 @@ def test08(a, b, c):
       
         
           
-            <h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><pre><code>import hashlib
-sha1 = hashlib.sha1()
-sha1.update(&apos;how to use sha1 in &apos;.encode())
-print(sha1.hexdigest())
-md5 = hashlib.md5()
-md5.update(&apos;how to use md5 in&apos;.encode())
-print(md5.hexdigest())
-</code></pre><h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><pre><code>import base64
-base64.b64encode(b&apos;binary\x00string&apos;)
-base64.b64decode(&apos;YmluYXJ5AHN0cmluZw==&apos;)
-</code></pre><h2 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h2><pre><code>import rsa
-# 生成密钥
-(pubkey, privkey) = rsa.newkeys(1024)
-message = &apos;hello&apos;
-crypto = rsa.encrypt(message.encode(), pubkey)
-message = rsa.decrypt(crypto, privkey).decode()
-print(message)
-# 签名
-signature = rsa.sign(message.encode(), privkey, &apos;SHA-1&apos;)
-# 公钥验证
-rsa.verify(message.encode(), signature, pubkey)
+            <h1 id="Scrapy教程12-抓取动态网站"><a href="#Scrapy教程12-抓取动态网站" class="headerlink" title="Scrapy教程12- 抓取动态网站"></a>Scrapy教程12- 抓取动态网站</h1><p>前面我们介绍的都是去抓取静态的网站页面，也就是说我们打开某个链接，它的内容全部呈现出来。
+但是如今的互联网大部分的web页面都是动态的，经常逛的网站例如京东、淘宝等，商品列表都是js，并有Ajax渲染，
+下载某个链接得到的页面里面含有异步加载的内容，这样再使用之前的方式我们根本获取不到异步加载的这些网页内容。</p>
+<p>使用Javascript渲染和处理网页是种非常常见的做法，如何处理一个大量使用Javascript的页面是Scrapy爬虫开发中一个常见的问题，
+这篇文章将说明如何在Scrapy爬虫中使用<a href="https://github.com/scrapy-plugins/scrapy-splash" target="_blank" rel="external">scrapy-splash</a>来处理页面中得Javascript。</p>
+<h3 id="scrapy-splash简介"><a href="#scrapy-splash简介" class="headerlink" title="scrapy-splash简介"></a>scrapy-splash简介</h3><p>scrapy-splash利用<a href="https://github.com/scrapy/scrapy" target="_blank" rel="external">Splash</a>将javascript和Scrapy集成起来，使得Scrapy可以抓取动态网页。</p>
+<p>Splash是一个javascript渲染服务，是实现了HTTP API的轻量级浏览器，底层基于Twisted和QT框架，Python语言编写。所以首先你得安装Splash实例</p>
+<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><p>官网建议使用docker容器安装方式Splash。那么首先你得先安装docker</p>
+<p>参考<a href="https://docs.docker.com/engine/installation/linux/ubuntulinux/" target="_blank" rel="external">官方安装文档</a>，这里我选择Ubuntu 12.04 LTS版本安装</p>
+<p>升级内核版本，docker需要3.13内核
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install linux-image-generic-lts-trusty</div><div class="line">$ sudo reboot</div></pre></td></tr></table></figure></p>
+<p>安装<code>CA</code>认证
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install apt-transport-https ca-certificates</div></pre></td></tr></table></figure></p>
+<p>增加新的<code>GPG</code>key
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</div></pre></td></tr></table></figure></p>
+<p>打开<code>/etc/apt/sources.list.d/docker.list</code>，如果没有就创建一个，然后删除任何已存在的内容，再增加下面一句
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deb https://apt.dockerproject.org/repo ubuntu-precise main</div></pre></td></tr></table></figure></p>
+<p>更新APT
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get purge lxc-docker</div><div class="line">$ apt-cache policy docker-engine</div></pre></td></tr></table></figure></p>
+<p>安装
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install docker-engine</div></pre></td></tr></table></figure></p>
+<p>启动docker服务
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service docker start</div></pre></td></tr></table></figure></p>
+<p>验证是否启动成功
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run hello-world</div></pre></td></tr></table></figure></p>
+<p>上面这条命令会下载一个测试镜像并在容器中运行它，它会打印一个消息，然后退出。</p>
+<h3 id="安装Splash"><a href="#安装Splash" class="headerlink" title="安装Splash"></a>安装Splash</h3><p>拉取镜像下来
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker pull scrapinghub/splash</div></pre></td></tr></table></figure></p>
+<p>启动容器
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run -p 5023:5023 -p 8050:8050 -p 8051:8051 scrapinghub/splash</div></pre></td></tr></table></figure></p>
+<p>现在可以通过0.0.0.0:8050(http),8051(https),5023 (telnet)来访问Splash了。</p>
+<h3 id="安装scrapy-splash"><a href="#安装scrapy-splash" class="headerlink" title="安装scrapy-splash"></a>安装scrapy-splash</h3><p>使用pip安装
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install scrapy-splash</div></pre></td></tr></table></figure></p>
+<h3 id="配置scrapy-splash"><a href="#配置scrapy-splash" class="headerlink" title="配置scrapy-splash"></a>配置scrapy-splash</h3><p>在你的scrapy工程的配置文件<code>settings.py</code>中添加
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SPLASH_URL = <span class="string">'http://192.168.203.92:8050'</span></div></pre></td></tr></table></figure></p>
+<p>添加Splash中间件，还是在<code>settings.py</code>中通过<code>DOWNLOADER_MIDDLEWARES</code>指定，并且修改<code>HttpCompressionMiddleware</code>的优先级
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DOWNLOADER_MIDDLEWARES = &#123;</div><div class="line">    <span class="string">'scrapy_splash.SplashCookiesMiddleware'</span>: <span class="number">723</span>,</div><div class="line">    <span class="string">'scrapy_splash.SplashMiddleware'</span>: <span class="number">725</span>,</div><div class="line">    <span class="string">'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware'</span>: <span class="number">810</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>默认情况下，HttpProxyMiddleware的优先级是750，要把它放在Splash中间件后面</p>
+<p>设置Splash自己的去重过滤器
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DUPEFILTER_CLASS = <span class="string">'scrapy_splash.SplashAwareDupeFilter'</span></div></pre></td></tr></table></figure></p>
+<p>如果你使用Splash的Http缓存，那么还要指定一个自定义的缓存后台存储介质，scrapy-splash提供了一个<code>scrapy.contrib.httpcache.FilesystemCacheStorage</code>的子类
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTPCACHE_STORAGE = <span class="string">'scrapy_splash.SplashAwareFSCacheStorage'</span></div></pre></td></tr></table></figure></p>
+<p>如果你要使用其他的缓存存储，那么需要继承这个类并且将所有的<code>scrapy.util.request.request_fingerprint</code>调用替换成<code>scrapy_splash.splash_request_fingerprint</code></p>
+<h3 id="使用scrapy-splash"><a href="#使用scrapy-splash" class="headerlink" title="使用scrapy-splash"></a>使用scrapy-splash</h3><h4 id="SplashRequest"><a href="#SplashRequest" class="headerlink" title="SplashRequest"></a>SplashRequest</h4><p>最简单的渲染请求的方式是使用<code>scrapy_splash.SplashRequest</code>，通常你应该选择使用这个
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">yield</span> SplashRequest(url, self.parse_result,</div><div class="line">    args=&#123;</div><div class="line">        <span class="comment"># optional; parameters passed to Splash HTTP API</span></div><div class="line">        <span class="string">'wait'</span>: <span class="number">0.5</span>,</div><div class="line"></div><div class="line">        <span class="comment"># 'url' is prefilled from request url</span></div><div class="line">        <span class="comment"># 'http_method' is set to 'POST' for POST requests</span></div><div class="line">        <span class="comment"># 'body' is set to request body for POST requests</span></div><div class="line">    &#125;,</div><div class="line">    endpoint=<span class="string">'render.json'</span>, <span class="comment"># optional; default is render.html</span></div><div class="line">    splash_url=<span class="string">'&lt;url&gt;'</span>,     <span class="comment"># optional; overrides SPLASH_URL</span></div><div class="line">    slot_policy=scrapy_splash.SlotPolicy.PER_DOMAIN,  <span class="comment"># optional</span></div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>另外，你还可以在普通的scrapy请求中传递<code>splash</code>请求meta关键字达到同样的效果
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">script = <span class="string">"""</span></div><div class="line">function main(splash)</div><div class="line">    local url = splash.args.url</div><div class="line">    assert(splash:go(url))</div><div class="line">    assert(splash:wait(1))</div><div class="line"></div><div class="line">    assert(splash:runjs('document.getElementsByTagName("span")[0].click()'))</div><div class="line">    assert(splash:wait(1))</div><div class="line"></div><div class="line">    -- return result as a JSON object</div><div class="line">    return &#123;</div><div class="line">        html = splash:html()</div><div class="line">    &#125;</div><div class="line">end</div><div class="line">"""</div><div class="line"><span class="keyword">yield</span> scrapy.Request(url, self.parse_result, meta=&#123;</div><div class="line">    <span class="string">'splash'</span>: &#123;</div><div class="line">        <span class="string">'args'</span>: &#123;</div><div class="line">            <span class="comment"># set rendering arguments here</span></div><div class="line">            <span class="string">'html'</span>: <span class="number">1</span>,</div><div class="line">            <span class="string">'png'</span>: <span class="number">1</span>,</div><div class="line"></div><div class="line">            <span class="comment"># 'url' is prefilled from request url</span></div><div class="line">            <span class="comment"># 'http_method' is set to 'POST' for POST requests</span></div><div class="line">            <span class="comment"># 'cookies': [],</span></div><div class="line">            <span class="comment"># 'lua_source': script,</span></div><div class="line">            <span class="comment"># 'body' is set to request body for POST requests</span></div><div class="line">        &#125;,</div><div class="line"></div><div class="line">        <span class="comment"># optional parameters</span></div><div class="line">        <span class="string">'endpoint'</span>: <span class="string">'render.json'</span>,  <span class="comment"># optional; default is render.json</span></div><div class="line">        <span class="string">'splash_url'</span>: <span class="string">'&lt;url&gt;'</span>,      <span class="comment"># optional; overrides SPLASH_URL</span></div><div class="line">        <span class="string">'slot_policy'</span>: scrapy_splash.SlotPolicy.PER_DOMAIN,</div><div class="line">        <span class="string">'splash_headers'</span>: &#123;&#125;,       <span class="comment"># optional; a dict with headers sent to Splash</span></div><div class="line">        <span class="string">'dont_process_response'</span>: <span class="keyword">True</span>, <span class="comment"># optional, default is False</span></div><div class="line">        <span class="string">'dont_send_headers'</span>: <span class="keyword">True</span>,  <span class="comment"># optional, default is False</span></div><div class="line">        <span class="string">'magic_response'</span>: <span class="keyword">False</span>,    <span class="comment"># optional, default is True</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>Splash API说明，使用<code>SplashRequest</code>是一个非常便利的工具来填充<code>request.meta[&#39;splash&#39;]</code>里的数据</p>
+<ul>
+<li>meta[‘splash’][‘args’] 包含了发往Splash的参数。</li>
+<li>meta[‘splash’][‘endpoint’] 指定了Splash所使用的endpoint，默认是<a href="http://splash.readthedocs.org/en/latest/api.html#render-html" target="_blank" rel="external">render.html</a></li>
+<li>meta[‘splash’][‘splash_url’] 覆盖了<code>settings.py</code>文件中配置的Splash URL</li>
+<li>meta[‘splash’][‘splash_headers’] 运行你增加或修改发往Splash服务器的HTTP头部信息，注意这个不是修改发往远程web站点的HTTP头部</li>
+<li>meta[‘splash’][‘dont_send_headers’] 如果你不想传递headers给Splash，将它设置成True</li>
+<li>meta[‘splash’][‘slot_policy’] 让你自定义Splash请求的同步设置</li>
+<li>meta[‘splash’][‘dont_process_response’] 当你设置成True后，<code>SplashMiddleware</code>不会修改默认的<code>scrapy.Response</code>请求。默认是会返回<code>SplashResponse</code>子类响应比如<code>SplashTextResponse</code></li>
+<li>meta[‘splash’][‘magic_response’] 默认为True，Splash会自动设置Response的一些属性，比如<code>response.headers</code>,<code>response.body</code>等</li>
+</ul>
+<p>如果你想通过Splash来提交Form请求，可以使用<code>scrapy_splash.SplashFormRequest</code>，它跟<code>SplashRequest</code>使用是一样的。</p>
+<h4 id="Responses"><a href="#Responses" class="headerlink" title="Responses"></a>Responses</h4><p>对于不同的Splash请求，scrapy-splash返回不同的Response子类</p>
+<ul>
+<li>SplashResponse 二进制响应，比如对/render.png的响应</li>
+<li>SplashTextResponse 文本响应，比如对/render.html的响应</li>
+<li>SplashJsonResponse JSON响应，比如对/render.json或使用Lua脚本的/execute的响应</li>
+</ul>
+<p>如果你只想使用标准的Response对象，就设置<code>meta[&#39;splash&#39;][&#39;dont_process_response&#39;]=True</code></p>
+<p>所有这些Response会把<code>response.url</code>设置成原始请求URL(也就是你要渲染的页面URL)，而不是Splash endpoint的URL地址。实际地址通过<code>response.real_url</code>得到</p>
+<h4 id="Session的处理"><a href="#Session的处理" class="headerlink" title="Session的处理"></a>Session的处理</h4><p>Splash本身是无状态的，那么为了支持scrapy-splash的session必须编写Lua脚本，使用<code>/execute</code>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">(splash)</span></span></div><div class="line">    splash:init_cookies(splash.args.cookies)</div><div class="line"></div><div class="line">    <span class="comment">-- ... your script</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        cookies = splash:get_cookies(),</div><div class="line">        <span class="comment">-- ... other results, e.g. html</span></div><div class="line">    &#125;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>而标准的scrapy session参数可以使用<code>SplashRequest</code>将cookie添加到当前Splash cookiejar中</p>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a><a href="">使用实例</a></h3>
+          
+        
+      
+    </div>
 
-rsaPublickey = int(pubkey, 16)
-key = rsa.PublicKey(rsaPublickey, int(&apos;10001&apos;, 16))
-sp = rsa.encrypt(pw.encode(&quot;utf-8&quot;), key)
-sp = binascii.b2a_hex(sp)
-</code></pre><h2 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h2><pre><code>import base64
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
-key = b&apos;0123456789abcdef&apos;
-iv = b&apos;0123456789abcdef&apos;
-text = b&apos;Attack at dawn&apos;
-# 转pad
-padder = padding.PKCS7(algorithms.AES.block_size).padder()
-padded_data = padder.update(text) + padder.finalize()
-padded_data = padded_data
+    <div>
+      
+    </div>
 
-cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    <div>
+      
+    </div>
 
-encryptor = cipher.encryptor()
-ct = encryptor.update(padded_data) + encryptor.finalize()
-ct_base64 = base64.b64encode(ct)
-print(ct_base64)
 
-decryptor = cipher.decryptor()
-padded_data = decryptor.update(ct) + decryptor.finalize()
-# 逆转pad
-unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
-data = unpadder.update(padded_data)
-text = data + unpadder.finalize()
-print(text)
-</code></pre><h2 id="binascii"><a href="#binascii" class="headerlink" title="binascii"></a>binascii</h2><pre><code>import binascii
-a = b&apos;worker&apos;
-c = binascii.hexlify(a)
-print(c)
-# 这个功能和a2b_hex()一样
-print(binascii.unhexlify(c))
-a2b_uu(string)                              将以ascii编码的一行数据转化为二进制, 并且返回二进制数据.
-b2a_uu(data)                                将二进制数据转化为一行以ascii编码的字符, date的最大长度为45.
-a2b_base64(string)                          将一块base64的数据转换为二进制数据, 并返回该二进制数据
-b2a_base64(string)                          与上面相反
-a2b_hqx(string)                             binhex4格式化的ASCII数据转换为二进制, 没有做RLE解压.
-b2a_hqx(data)                               与上相反
-rledecode_hqx(data)                         按照binhex4标准, 对data执行RLE解压
-rlecode_hqx(data)                           对data执行binhex方式的压缩, 并返回结果
-crc_hqx(data, crc)                          计算data的binhex4的crc值
-crc32(data[, crc])                          根据crc, 计算crc32(32位检验和数据, 然后将结果 &amp; 0xffffffff(为了在所有Python版本中生成相同的结果, 具体不清楚, 求指导…)
-a2b_qp(string[, header])                    quoted - printable data-&gt;bin, 并返回
-b2a_qp(data[, quotetabs, istext, header])   与上面相反
-hexlify(data)                               返回二进制数据的16进制的表现形式
-unhexlify(hexstr)                           与上面相反
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/BeautifulSoup.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="满天星辰">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/30/python/BeautifulSoup.html" itemprop="url">
+                  BeautifulSoup
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/30/python/BeautifulSoup.html" class="leancloud_visitors" data-flag-title="BeautifulSoup">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="BeautifulSoup"><a href="#BeautifulSoup" class="headerlink" title="BeautifulSoup"></a>BeautifulSoup</h1><h2 id="bs"><a href="#bs" class="headerlink" title="bs"></a>bs</h2><pre><code>from bs4 import BeautifulSoup
+bs = BeautifulSoup(content, &apos;lxml&apos;)
+[&apos;class&apos;]  # list
+[&apos;id&apos;]  # str
+[&apos;href&apos;]
+.name .head .body
+.attrs  # 字典
+.text  # 文档
+.contents  # 子list
+.children  # 生成器
+.descendants  # 所以子孙节点
+</code></pre><h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><pre><code>使用 .next_sibling 和 .previous_sibling 属性来查询兄弟节点
+通过 .next_siblings 和 .previous_siblings 全部兄弟节点
+前进后退
+next_element 和 .previous_element
+通过 .next_elements 和 .previous_elements 所有前后节点
+</code></pre><h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><pre><code>.string
+.strings和.stripped_strings
+[text for text in soup.stripped_strings]
+.get_text(&apos;|&apos;, strip=True)
+</code></pre><h2 id="find-all"><a href="#find-all" class="headerlink" title="find_all"></a>find_all</h2><pre><code>find_all(name, attrs, recursive, text, **kwargs)  # recursive=False只搜索子节点
+
+def has_class_but_no_id(tag):
+    return tag.has_attr(&apos;class&apos;) and not tag.has_attr(&apos;id&apos;)
+soup.find_all(has_class_but_no_id)
+soup.find_all(href=re.compile(&quot;elsie&quot;), id=&apos;link1&apos;)
+soup.find_all(attrs={&quot;data-foo&quot;: &quot;value&quot;}  # data-* 属性
+soup.find_all(text=[&quot;Tillie&quot;, &quot;Elsie&quot;, &quot;Lacie&quot;])
+soup.find_all(id=&apos;link2&apos;)
+
+soup.find_all(&quot;a&quot;, limit=2)
+soup.find_all(&apos;a&apos;) - -soup(a)
+</code></pre><h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>find(name, attrs, recursive, text, **kwargs)</p>
+<pre><code>1 find(tagname)        # 直接搜索名为tagname的tag 如：find(&apos;head&apos;)
+2 find(list)           # 搜索在list中的tag，如: find([&apos;head&apos;, &apos;body&apos;])
+3 find(dict)           # 搜索在dict中的tag，如:find({&apos;head&apos;:True, })
+4 find(re.compile(&apos;&apos;)) # 搜索符合正则的tag, 如:find(re.compile(&apos;^p&apos;))
+</code></pre><h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><pre><code>标签名不加任何修饰，类名前加点，id名前加
+soup.select(&apos;title&apos;)
+soup.select(&apos;.sister&apos;)
+soup.select(&apos;#link1&apos;)
+soup.select(&quot;head &gt; title&quot;)  # 直接子标签查找
+不在同一节点的空格隔开，同一节点的不加空格
+soup.select(&apos;p a[href=&quot;http://example.com/elsie&quot;]&apos;)
 </code></pre>
           
         
@@ -948,7 +1167,7 @@ unhexlify(hexstr)                           与上面相反
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/arrow时间模块.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/爬虫,aiohttp.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -970,8 +1189,8 @@ unhexlify(hexstr)                           与上面相反
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/arrow时间模块.html" itemprop="url">
-                  arrow时间模块
+                <a class="post-title-link" href="/2018/03/30/python/爬虫,aiohttp.html" itemprop="url">
+                  爬虫,aiohttp
                 </a>
               
             
@@ -987,8 +1206,8 @@ unhexlify(hexstr)                           与上面相反
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -1005,7 +1224,7 @@ unhexlify(hexstr)                           与上面相反
 
           
           
-             <span id="/2017/10/23/python/arrow时间模块.html" class="leancloud_visitors" data-flag-title="arrow时间模块">
+             <span id="/2018/03/30/python/爬虫,aiohttp.html" class="leancloud_visitors" data-flag-title="爬虫,aiohttp">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1036,409 +1255,136 @@ unhexlify(hexstr)                           与上面相反
       
         
           
-            <h1 id="Python-日期处理-arrow时间模块"><a href="#Python-日期处理-arrow时间模块" class="headerlink" title="Python 日期处理 arrow时间模块"></a>Python 日期处理 arrow时间模块</h1><h2 id="–-arrow"><a href="#–-arrow" class="headerlink" title="– arrow"></a>– arrow</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">arrow.utcnow()</div><div class="line">arrow.now()</div><div class="line">arrow.now(&apos;US/Pacific&apos;)</div><div class="line">arw=arrow.utcnow()</div><div class="line">arw.datetime</div><div class="line">arw.timestamp</div><div class="line">arw.year</div><div class="line">arw.time()</div><div class="line">arw.date()</div><div class="line">arw.tzinfo</div><div class="line">arw.naive</div></pre></td></tr></table></figure>
-<h2 id="–arrow-get"><a href="#–arrow-get" class="headerlink" title="–arrow.get"></a>–arrow.get</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">arrow.get(2013, 5, 5)</div><div class="line">arrow.get(&apos;2013-05-11T21:23:58.970460+00:00&apos;)</div><div class="line">arrow.get(&apos;2013-09-30T15:34:00.000-07:00&apos;)</div><div class="line">arrow.get(&apos;2013-05-05 12:30:45&apos;, &apos;YYYY-MM-DD HH:mm:ss&apos;)</div><div class="line">arrow.get(&apos;June was born in May 1980&apos;, &apos;MMMM YYYY&apos;)</div><div class="line">arrow.get(1367900664)</div><div class="line">arrow.get(1367900664.152325)</div><div class="line">arrow.get(&apos;1367900664&apos;)</div><div class="line">arrow.get(&apos;1367900664.152325&apos;)</div></pre></td></tr></table></figure>
-<h2 id="–arrow-format"><a href="#–arrow-format" class="headerlink" title="–arrow.format"></a>–arrow.format</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">local=arrow.now()</div><div class="line">local.format()</div><div class="line">local.format(&apos;YYYY-MM-DD HH:mm:ss ZZ&apos;)</div><div class="line">local.humanize()</div><div class="line">local.humanize(locale=&apos;ko_kr&apos;)</div><div class="line">arrow.utcnow().format(&apos;YYYY-MM-DD HH:mm:ss ZZ&apos;)</div></pre></td></tr></table></figure>
-<h2 id="–arrow-change"><a href="#–arrow-change" class="headerlink" title="–arrow -change"></a>–arrow -change</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">arw = arrow.utcnow()</div><div class="line">arw.shift(weeks=+3)</div><div class="line">arw.replace(hour=4, minute=40)</div><div class="line">arw.replace(weeks=+3)</div><div class="line">arw.replace(tzinfo=&apos;US/Pacific&apos;)</div><div class="line">utc.to(&apos;local&apos;)</div><div class="line">utc.to(&apos;local&apos;).to(&apos;utc&apos;)</div></pre></td></tr></table></figure>
-<h2 id="–arrow-span"><a href="#–arrow-span" class="headerlink" title="–arrow -span"></a>–arrow -span</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">arrow.utcnow().span(&apos;hour&apos;)</div><div class="line">arrow.utcnow().floor(&apos;hour&apos;)</div><div class="line">arrow.utcnow().ceil(&apos;hour&apos;)</div></pre></td></tr></table></figure>
-<h2 id="–arrow-range"><a href="#–arrow-range" class="headerlink" title="–arrow -range"></a>–arrow -range</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">start = arrow.get(2013, 5, 5, 12, 30)</div><div class="line">end = arrow.get(2013, 5, 5, 17, 15)</div><div class="line">for r in arrow.Arrow.span_range(&apos;hour&apos;, start, end):</div><div class="line">    print(r)</div><div class="line">    print(repr(r))</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/正则表达式.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="bo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="满天星辰">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/23/python/正则表达式.html" itemprop="url">
-                  正则表达式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/23/python/正则表达式.html" class="leancloud_visitors" data-flag-title="正则表达式">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Python-正则表达式-re-模块的使用"><a href="#Python-正则表达式-re-模块的使用" class="headerlink" title="Python 正则表达式 re 模块的使用"></a>Python 正则表达式 re 模块的使用</h1><h2 id="匹配-后者相反"><a href="#匹配-后者相反" class="headerlink" title="匹配  后者相反"></a>匹配  后者相反</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\d \D   匹配数字</div><div class="line">\s \S   匹配任意的空白符[ \t\n\r\f\v]</div><div class="line">\w \W   匹配字母或数字或下划线或汉字</div><div class="line">\b \B   匹配单词的开始</div><div class="line">^   $   匹配字符串的开始</div><div class="line">\A \Z   匹配开头</div><div class="line">.匹配除换行符以外的任意字符</div><div class="line">*+?&#123;m, n&#125; 分别匹配0 - ;1 - ;0 - 1 ;m - n;</div><div class="line">[^ a]   非a</div><div class="line">[]      #字符集</div></pre></td></tr></table></figure>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&apos;\\&apos;  转义</div><div class="line">()分组</div><div class="line">r 转义</div><div class="line">?非贪婪</div></pre></td></tr></table></figure>
-<h2 id="re各种方法"><a href="#re各种方法" class="headerlink" title="re各种方法"></a>re各种方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">re.findall(&apos;(?#)abc&apos;, &apos;A\nBc&apos;)</div><div class="line">pat = re.compile(&apos;(^w+).python.org&apos;)  # 编译</div><div class="line">re.search(pat, text)  # 搜索</div><div class="line">re.match(&apos;(?P&lt;shuzi&gt;a.c)&apos;, &apos;abc&apos;).group(&apos;shuzi&apos;)  # 从开头匹配</div><div class="line">re.findall(pat, text)  # list</div><div class="line">group() groups() group(1)</div><div class="line">text = &apos;a, b,,,,c  d&apos;</div><div class="line">re.split(&apos;[, ]+&apos;, text, maxsplit=2)  # MAX=2</div><div class="line">re.sub(&apos;a&apos;, &apos;b&apos;, &apos;abca&apos;, count=1)    # 一次</div><div class="line">log = &apos;2016-12-01&apos;</div><div class="line">re.sub(&apos;(?P&lt;year&gt;\d&#123;4&#125;)-(?P&lt;month&gt;\d&#123;2&#125;)-(?P&lt;day&gt;\d&#123;2&#125;)&apos;,</div><div class="line">       r&apos;\g&lt;day&gt;/\g&lt;month&gt;/\g&lt;year&gt;&apos;, log)</div><div class="line">pattern = &apos;(?P&lt;year&gt;\d&#123;4&#125;)-(?P&lt;month&gt;\d&#123;2&#125;)-(?P&lt;day&gt;\d&#123;2&#125;)&apos;</div><div class="line">m = re.search(pattern, &apos;2016-01-01&apos;)</div><div class="line">m.groupdict()</div><div class="line">m.group(&apos;year&apos;)</div><div class="line">m.group(&apos;month&apos;)</div><div class="line">m.group(&apos;day&apos;)</div></pre></td></tr></table></figure>
-<h2 id="捕获-amp-模式"><a href="#捕获-amp-模式" class="headerlink" title="捕获&amp;模式"></a>捕获&amp;模式</h2><h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><pre><code>捕获(exp)                匹配exp, 并捕获文本到自动命名的组里
-(?&lt; name &gt; exp)          匹配exp, 并捕获文本到名称为name的组里，也可以写成(?&apos;name&apos;exp)
-(?: exp)                 匹配exp, 不捕获匹配的文本，也不给此分组分配组号
-零宽断言(?=exp)          匹配exp前面的位置
-(?&lt;= exp)                匹配exp后面的位置
-(?!exp)                  匹配后面跟的不是exp的位置
-(?&lt;!exp)                 匹配前面不是exp的位置
-(?  # ...)               注释，不影响正则表达式其它部分,用法参见 模式 I
-(?(id / name)yes | no)   若前面指定id或name的分区匹配成功则执行yes处的正则，否则执行no处的正则
-(?P=name)                分组的引用模式，可在同一个正则表达式用引用前面命名过的正则
-</code></pre><h3 id="flags-编译时指定的模式"><a href="#flags-编译时指定的模式" class="headerlink" title="flags 编译时指定的模式"></a>flags 编译时指定的模式</h3><pre><code>re.compile(&apos;&apos;, re.I | re.M | re.S)
-regex=re.compile(&quot;hello world!&quot;, re.I)MSXU
-IgnoreCase(忽略大小写)        匹配时不区分大小写。
-Multiline(多行模式)           更改 ^ 和$的含义，使它们分别在任意一行的行首和行尾匹配，而不仅仅在整个字符串的开头和结尾匹配。
-Singleline(单行模式)          更改.的含义，使它与每一个字符匹配（包括换行符&apos;\n&apos;)
-IgnorePatternWhitespace(忽略空白)   忽略表达式中的非转义空白并启用由  # 标记的注释。
-ExplicitCapture(显式捕获)     仅捕获已被显式命名的组。
-X VERBOSE，                   此模式忽略正则表达式中的空白和  # 号的注释
-</code></pre><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><pre><code>mail
-pattern = r&quot;(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)&quot;
-http
-pattern = &apos;^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$&apos;
-ip4
-pattern = r&apos;^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$&apos;
-ip6
-pattern = r&apos;^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$&apos;
-mac
-pattern = r&apos;^(?i)([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$&apos;
-1.校验密码强度
-    密码的强度必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8 - 10之间
-    &apos;^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$&apos;
-2.校验中文
-    字符串只能是中文
-    &apos;^[\\u4e00-\\u9fa5]{0,}$&apos;
-3.校验身份证号码
-    15位：
-    &apos;^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$&apos;
-    18位：
-    &apos;^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$&apos;
-4.校验手机号
-    下面是国内 1358开头的手机号正则表达式
-    &apos;^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$&apos;判断IE的版本
-    &apos;^.*MSIE [5-8](?:\\.[0-9]+)?(?!.*Trident\\/[5-9]\\.0).*$&apos;
-5.提取URL链接
-    &apos;^(f|ht){1}(tp|tps):\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- ./?%&amp;=]*)?&apos;
-6.文件路径及扩展名校验
-    &apos;^([a-zA-Z]\\:|\\\\)\\\\([^\\\\]+\\\\)*[^\\/:*?&quot;&lt;&gt;|]+\\.txt(l)?$&apos;
-7.查找CSS属性
-    &apos;^\\s*[a-zA-Z\\-]+\\s*[:]{1}\\s[a-zA-Z0-9\\s.#]+[;]{1}&apos;
-8.抽取注释
-    &apos;&lt;!--(.*?)--&gt;&apos;
-9.匹配HTML标签
-    &apos;&lt;\\/?\\w+((\\s+\\w+(\\s*=\\s*(?:&quot;.*?&quot;|&apos;.*?&apos;|[\\^&apos;&quot;&gt;\\s] + ))?) +\\s*|\\s*)\\/?&gt;&apos;
-</code></pre><h2 id="匹配例子"><a href="#匹配例子" class="headerlink" title="匹配例子"></a>匹配例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">1、非负整数：^\d+$ </div><div class="line">2、正整数：^[0-9]*[1-9][0-9]*$ </div><div class="line">3、非正整数：^((-\d+)|(0+))$ </div><div class="line">4、负整数：^-[0-9]*[1-9][0-9]*$ </div><div class="line">5、整数：^-?\d+$ </div><div class="line">6、非负浮点数：^\d+(\.\d+)?$ </div><div class="line">7、正浮点数：^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$ </div><div class="line">8、非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$ </div><div class="line">9、负浮点数：^(-((正浮点数正则式)))$ </div><div class="line">10、英文字符串：^[A-Za-z]+$ </div><div class="line">11、英文大写串：^[A-Z]+$ </div><div class="line">12、英文小写串：^[a-z]+$ </div><div class="line">13、英文字符数字串：^[A-Za-z0-9]+$ </div><div class="line">14、英数字加下划线串：^\w+$ </div><div class="line">15、E-mail地址：^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$ </div><div class="line">16、URL：^[a-zA-Z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\s*)?$ </div><div class="line">或：^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&amp;_~`@[\]\&apos;:+!]*([^\&quot;\&quot;])*$ </div><div class="line">17、邮政编码：^[1-9]\d&#123;5&#125;$ </div><div class="line">18、中文：^[\u0391-\uFFE5]+$ </div><div class="line">19、电话号码：^((\(\d&#123;2,3&#125;\))|(\d&#123;3&#125;\-))?(\(0\d&#123;2,3&#125;\)|0\d&#123;2,3&#125;-)?[1-9]\d&#123;6,7&#125;(\-\d&#123;1,4&#125;)?$ </div><div class="line">20、手机号码：^((\(\d&#123;2,3&#125;\))|(\d&#123;3&#125;\-))?13\d&#123;9&#125;$ </div><div class="line">21、双字节字符(包括汉字在内)：^\x00-\xff </div><div class="line">22、匹配首尾空格：(^\s*)|(\s*$)（像vbscript那样的trim函数） </div><div class="line">23、匹配HTML标记：.*| </div><div class="line">24、匹配空行：\n[\s| ]*\r </div><div class="line">25、提取信息中的网络链接：(h|H)(r|R)(e|E)(f|F) *= *(&apos;|&quot;)?(\w|\\|\/|\.)+(&apos;|&quot;| *|&gt;)? </div><div class="line">26、提取信息中的邮件地址：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)* </div><div class="line">27、提取信息中的图片链接：(s|S)(r|R)(c|C) *= *(&apos;|&quot;)?(\w|\\|\/|\.)+(&apos;|&quot;| *|&gt;)? </div><div class="line">28、提取信息中的IP地址：(\d+)\.(\d+)\.(\d+)\.(\d+) </div><div class="line">29、提取信息中的中国手机号码：(86)*0*13\d&#123;9&#125; </div><div class="line">30、提取信息中的中国固定电话号码：(\(\d&#123;3,4&#125;\)|\d&#123;3,4&#125;-|\s)?\d&#123;8&#125; </div><div class="line">31、提取信息中的中国电话号码（包括移动和固定电话）：(\(\d&#123;3,4&#125;\)|\d&#123;3,4&#125;-|\s)?\d&#123;7,14&#125; </div><div class="line">32、提取信息中的中国邮政编码：[1-9]&#123;1&#125;(\d+)&#123;5&#125; </div><div class="line">33、提取信息中的浮点数（即小数）：(-?\d*)\.?\d+ </div><div class="line">34、提取信息中的任何数字 ：(-?\d*)(\.\d+)? </div><div class="line">35、IP：(\d+)\.(\d+)\.(\d+)\.(\d+) </div><div class="line">36、电话区号：/^0\d&#123;2,3&#125;$/ </div><div class="line">37、腾讯QQ号：^[1-9]*[1-9][0-9]*$ </div><div class="line">38、帐号(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]&#123;4,15&#125;$ </div><div class="line">39、中文、英文、数字及下划线：^[\u4e00-\u9fa5_a-zA-Z0-9]+$</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">只能输入数字：“^[0-9]*$”</div><div class="line">只能输入n位的数字：“^d&#123;n&#125;$”</div><div class="line">只能输入至少n位数字：“^d&#123;n,&#125;$”</div><div class="line">只能输入m-n位的数字：“^d&#123;m,n&#125;$”</div><div class="line">只能输入零和非零开头的数字：“^(0|[1-9][0-9]*)$”</div><div class="line">只能输入有两位小数的正实数：“^[0-9]+(.[0-9]&#123;2&#125;)?$”</div><div class="line">只能输入有1-3位小数的正实数：“^[0-9]+(.[0-9]&#123;1,3&#125;)?$”</div><div class="line">只能输入非零的正整数：“^+?[1-9][0-9]*$”</div><div class="line">只能输入非零的负整数：“^-[1-9][0-9]*$”</div><div class="line">只能输入长度为3的字符：“^.&#123;3&#125;$”</div><div class="line">只能输入由26个英文字母组成的字符串：“^[A-Za-z]+$”</div><div class="line">只能输入由26个大写英文字母组成的字符串：“^[A-Z]+$”</div><div class="line">只能输入由26个小写英文字母组成的字符串：“^[a-z]+$”</div><div class="line">只能输入由数字和26个英文字母组成的字符串：“^[A-Za-z0-9]+$”</div><div class="line">只能输入由数字、26个英文字母或者下划线组成的字符串：“^w+$”</div><div class="line">验证用户密码:“^[a-zA-Z]w&#123;5,17&#125;$”正确格式为：以字母开头，长度在6-18之间，</div><div class="line"></div><div class="line">只能包含字符、数字和下划线。</div><div class="line">验证是否含有^%&amp;’,;=?$”等字符：“[^%&amp;&apos;,;=?$x22]+”</div><div class="line">只能输入汉字：“^[u4e00-u9fa5],&#123;0,&#125;$”</div><div class="line">验证Email地址：“^w+[-+.]w+)*@w+([-.]w+)*.w+([-.]w+)*$”</div><div class="line">验证InternetURL：“^http://([w-]+.)+[w-]+(/[w-./?%&amp;=]*)?$”</div><div class="line">验证电话号码：“^((d&#123;3,4&#125;)|d&#123;3,4&#125;-)?d&#123;7,8&#125;$”</div><div class="line"></div><div class="line">正确格式为：“XXXX-XXXXXXX”，“XXXX-XXXXXXXX”，“XXX-XXXXXXX”，</div><div class="line"></div><div class="line">“XXX-XXXXXXXX”，“XXXXXXX”，“XXXXXXXX”。</div><div class="line">验证身份证号（15位或18位数字）：“^d&#123;15&#125;|d&#123;&#125;18$”</div><div class="line">验证一年的12个月：“^(0?[1-9]|1[0-2])$”正确格式为：“01”-“09”和“1”“12”</div><div class="line">验证一个月的31天：“^((0?[1-9])|((1|2)[0-9])|30|31)$”</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/conda & pip.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="bo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="满天星辰">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/23/python/conda & pip.html" itemprop="url">
-                  conda & pip
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/23/python/conda & pip.html" class="leancloud_visitors" data-flag-title="conda & pip">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="conda-amp-pip"><a href="#conda-amp-pip" class="headerlink" title="conda &amp; pip"></a>conda &amp; pip</h1><h2 id="简单的使用"><a href="#简单的使用" class="headerlink" title="简单的使用"></a>简单的使用</h2><pre><code>执行python -m venv myenv1即可创建虚拟环境myenv1
-*nix系统下，使用命令pyvenv。
-Windows下命令行myenv1\Scripts\activate.bat进入环境，
-使用deactivate退出虚拟环境。
-</code></pre><h2 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h2><pre><code># 将anaconda的bin目录加入PATH，根据版本不同，也可能是~/anaconda3/bin
-echo &apos;export PATH=&quot;~/anaconda2/bin:$PATH&quot;&apos; &gt;&gt; ~/.bashrc
-# 更新bashrc以立即生效
-source ~/.bashrc
-# 创建一个名为python34的环境，指定Python版本是3.4（不用管是3.4.x，conda会为我们自动寻找3.4.x中的最新版本）
-conda create --name python34 python=3.4
-# conda create -n bunnies python=3 Astroid Babel
-# conda info -envis
-# 安装好后，使用activate激活某个环境
-activate python34 # for Windows
-source activate python34 # for Linux &amp; Mac
-# 激活后，会发现terminal输入的地方多了python34的字样，实际上，此时系统做的事情就是把默认2.7环境从PATH中去除，再把3.4对应的命令加入PATH
-# 此时，再次输入
-python --version
-# 可以得到`Python 3.4.5 :: Anaconda 4.1.1 (64-bit)`，即系统已经切换到了3.4的环境
-# 如果想返回默认的python 2.7环境，运行
-deactivate python34 # for Windows
-source deactivate python34 # for Linux &amp; Mac
-# 删除一个已有的环境
-conda remove --name python34 --all
-# 通过克隆来复制一个环境。这儿将通过克隆snowfllakes来创建一个称为flowers的副本。
-conda create -n flowers --clone snowflakes
-
-
-# 安装scipy
-conda install scipy
-# conda会从从远程搜索scipy的相关信息和依赖项目，对于python 3.4，conda会同时安装numpy和mkl（运算加速的库）
-# 查看当前环境下已安装的包
-conda list
-# 查看某个指定环境的已安装包
-conda list -n python34
-# 查找package信息
-conda search numpy
-# 安装package
-conda install -n python34 numpy
-# 如果不用-n指定环境名称，则被安装在当前活跃环境
-# 也可以通过-c指定通过某个channel安装
-# 更新package
-conda update -n python34 numpy
-# 删除package
-conda remove -n python34 numpy
-
-
-# 更新conda，保持conda最新
-conda update conda
-# 更新anaconda
-conda update anaconda
-# 更新python
-conda update python
-# 假设当前环境是python 3.4, conda会将python升级为3.4.x系列的当前最新版本
-
-# 在当前环境下安装anaconda包集合
-conda install anaconda
-# 结合创建环境的命令，以上操作可以合并为
-conda create -n python34 python=3.4 anaconda
-# 也可以不用全部安装，根据需求安装自己需要的package即可
-
-
-# 添加Anaconda的TUNA镜像
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-# 设置搜索时显示通道地址
-conda config --set show_channel_urls yes
-</code></pre><h2 id="改源"><a href="#改源" class="headerlink" title="改源"></a>改源</h2><h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><pre><code>linux下运行命令
-vi ~/.pip/pip.conf
-然后写入如下内容并保存
-[global]
-trusted-host =  mirrors.aliyun.com
-index-url = http://mirrors.aliyun.com/pypi/simple
-</code></pre><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><pre><code>import os
-ini = &quot;[global]\nindex-url = https://pypi.doubanio.com/simple/\n&quot;
-pippath = os.environ[&quot;USERPROFILE&quot;]+&quot;\\pip\\&quot;
-exec(&quot;if not os.path.exists(pippath):\n\tos.mkdir(pippath)&quot;)
-open(pippath+&quot;/pip.ini&quot;, &quot;w+&quot;).write(ini)
-</code></pre><h2 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h2><pre><code>pip install SomePackage＃最新版本
-pip install SomePackage == 1.0.4＃具体版本
-pip install&apos;SomePackage&gt; = 1.0.4&apos;＃最小版本
-pip install --upgrade SomePackage
-pip download SomePackage
-show list search uninstall
-# 导出当前已经安装包
-pip freeze &gt; requirements.txt
-pip install -r requirements.txt
+            <h1 id="爬虫-aiohttp"><a href="#爬虫-aiohttp" class="headerlink" title="爬虫,aiohttp"></a>爬虫,aiohttp</h1><pre><code>import asyncio
+import aiohttp
+
+
+# 简单实例
+async def aiohttp_test01(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            print(resp.status)
+            print(await resp.text())
+
+loop = asyncio.get_event_loop()
+tasks = [aiohttp_test01(&quot;https://api.github.com/events&quot;)]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
+#aiohttp.request(&apos;GET&apos;,url)
+# 其他Http方法
+# session.post(&apos;http://httpbin.org/post&apos;, data=b&apos;data&apos;)
+# session.put(&apos;http://httpbin.org/put&apos;, data=b&apos;data&apos;)
+# session.delete(&apos;http://httpbin.org/delete&apos;)
+# session.head(&apos;http://httpbin.org/get&apos;)
+# session.options(&apos;http://httpbin.org/get&apos;)
+# session.patch(&apos;http://httpbin.org/patch&apos;, data=b&apos;data&apos;)
+
+# 自定义Headers
+# payload = {&apos;some&apos;: &apos;data&apos;}
+# headers = {&apos;content-type&apos;: &apos;application/json&apos;}
+# await session.post(url, data=json.dumps(payload), headers=headers)
+
+# 自定义Cookie
+# cookies = {&apos;cookies_are&apos;: &apos;working&apos;}
+# async with ClientSession(cookies=cookies) as session:
+# 访问Cookie: session.cookie_jar
+
+# 在URLs中传递参数
+# 1. params = {&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;}
+# 2. params = [(&apos;key&apos;, &apos;value1&apos;), (&apos;key&apos;, &apos;value2&apos;)]
+# async with session.get(&apos;http://httpbin.org/get&apos;, params=params) as resp:
+#     assert resp.url == &apos;http://httpbin.org/get?key2=value2&amp;key1=value1&apos;
+
+# 发送数据
+# payload = {&apos;key1&apos;: &apos;value1&apos;, &apos;key2&apos;: &apos;value2&apos;}
+# async with session.post(&apos;http://httpbin.org/post&apos;, data=payload) as resp:
+# async with session.post(url, data=json.dumps(payload)) as resp:
+#     print(await resp.text())
+
+# 发送文件(1)
+# files = {&apos;file&apos;: open(&apos;report.xls&apos;, &apos;rb&apos;)}
+# await session.post(url, data=files)
+
+# 发送数据(2)
+# data = FormData()
+# data.add_field(&apos;file&apos;,
+#                open(&apos;report.xls&apos;, &apos;rb&apos;),
+#                filename=&apos;report.xls&apos;,
+#                content_type=&apos;application/vnd.ms-excel&apos;)
+# await session.post(url, data=data)
+
+# 超时设置
+# aync with session.get(&apos;https://github.com&apos;, timeout=60) as r:
+
+# 代理支持
+# async with aiohttp.ClientSession() as session:
+#     async with session.get(&quot;http://python.org&quot;, proxy=&quot;http://some.proxy.com&quot;) as resp:
+#         print(resp.status)
+
+# async with aiohttp.ClientSession() as session:
+#     proxy_auth = aiohttp.BasicAuth(&apos;user&apos;, &apos;pass&apos;)
+#     async with session.get(&quot;http://python.org&quot;, proxy=&quot;http://some.proxy.com&quot;, proxy_auth=proxy_auth) as resp:
+#         print(resp.status)
+# session.get(&quot;http://python.org&quot;, proxy=&quot;http://user:pass@some.proxy.com&quot;)
+
+# 返回的内容
+# async with session.get(&apos;https://api.github.com/events&apos;) as resp:
+#     print(await resp.text())
+#     print(await resp.text(encoding=&apos;gbk&apos;))
+#     print(await resp.read())
+#     print(await resp.json())
+
+# 返回内容较大
+# with open(filename, &apos;wb&apos;) as fd:
+#     while True:
+#         chunk = await resp.content.read(chunk_size)
+#         if not chunk:
+#             break
+#         fd.write(chunk)
+
+# 返回的其他变量
+# async with session.get(&apos;http://httpbin.org/get&apos;) as resp:
+#     print(resp.status)        # 状态码
+#     print(resp.headers)       # Headers
+#     print(resp.raw_headers)   # 原始Headers
+#     print(resp.cookies)       # 返回的Cookie
+
+# 访问历史History
+# resp = await session.get(&apos;http://example.com/some/redirect/&apos;)
+# resp: &lt;ClientResponse(http://example.com/some/other/url/) [200]&gt;
+# resp.history: (&lt;ClientResponse(http://example.com/some/redirect/) [301]&gt;,)
+
+# 释放返回的Response
+# 1. async with session.get(url) as resp: pass
+# 2. await resp.release()
+
+# 连接器: Connectors
+# conn = aiohttp.TCPConnector()
+# session = aiohttp.ClientSession(connector=conn)
+
+# 限制连接池大小:
+# conn = aiohttp.TCPConnector(limit=30)
+# conn = aiohttp.TCPConnector(limit=None)
+
+async def aiohttp_test01(url,cookies=None,headers=None,proxy=None):
+    conn = aiohttp.TCPConnector(limit=30)
+    #cookies = {&apos;cookies_are&apos;: &apos;working&apos;}
+    async with aiohttp.ClientSession(connector=conn,cookies=cookies) as session:
+        #payload = {&apos;some&apos;: &apos;data&apos;}
+        #headers = {&apos;content-type&apos;: &apos;application/json&apos;}
+        #proxy=&quot;http://some.proxy.com&quot;
+        async with session.get(url,timeout=10,headers=headers,proxy=proxy) as resp:
+            print(resp.status)
+            #await parser(resp)
+            #print(await resp.text(encoding=&apos;gbk&apos;))
+            #print(await resp.read())
+            #print(await resp.json())
+            await resp.release()
+
+loop = asyncio.get_event_loop()
+tasks = [aiohttp_test01(url) for url in urls]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
 </code></pre>
           
         
@@ -1479,7 +1425,7 @@ pip install -r requirements.txt
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/ipython.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/安装scrapy.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -1501,8 +1447,8 @@ pip install -r requirements.txt
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/ipython.html" itemprop="url">
-                  ipython
+                <a class="post-title-link" href="/2018/03/30/python/安装scrapy.html" itemprop="url">
+                  安装scrapy
                 </a>
               
             
@@ -1518,8 +1464,8 @@ pip install -r requirements.txt
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -1536,7 +1482,7 @@ pip install -r requirements.txt
 
           
           
-             <span id="/2017/10/23/python/ipython.html" class="leancloud_visitors" data-flag-title="ipython">
+             <span id="/2018/03/30/python/安装scrapy.html" class="leancloud_visitors" data-flag-title="安装scrapy">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1567,62 +1513,22 @@ pip install -r requirements.txt
       
         
           
-            <h1 id="ipython"><a href="#ipython" class="headerlink" title="ipython"></a>ipython</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre><code>. % run命令
-ipython - -pylab
-Tab键
-内省?
-</code></pre><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre><code>Ctrl - P    或上箭头键 后向搜索命令历史中以当前输入的文本开头的命令
-Ctrl - N   或下箭头键 前向搜索命令历史中以当前输入的文本开头的命令
-Ctrl - R   按行读取的反向历史搜索（部分匹配）
-Ctrl - Shift - v   从剪贴板粘贴文本
-Ctrl - C   中止当前正在执行的代码
-Ctrl - A   将光标移动到行首
-Ctrl - E   将光标移动到行尾
-Ctrl - K   删除从光标开始至行尾的文本
-Ctrl - U   清除当前行的所有文本译注12
-Ctrl - F   将光标向前移动一个字符
-Ctrl - b   将光标向后移动一个字符
-Ctrl - L   清屏
-</code></pre><h2 id="魔法"><a href="#魔法" class="headerlink" title="魔法"></a>魔法</h2><pre><code>%quickref 显示IPython的快速参考
-%magic 显示所有魔术命令的详细文档
-%debug 从最新的异常跟踪的底部进入交互式调试器
-%hist 打印命令的输入（可选输出）历史
-%pdb 在异常发生后自动进入调试器
-%paste 执行剪贴板中的Python代码
-%cpaste 打开一个特殊提示符以便手工粘贴待执行的Python代码
-%reset 删除interactive命名空间中的全部变量 / 名称
-%page OBJECT 通过分页器打印输出OBJECT
-%run script.py 在IPython中执行一个Python脚本文件
-%prun statement 通过cProfile执行statement，并打印分析器的输出结果
-%time statement 报告statement的执行时间
-%timeit statement 多次执行statement以计算系综平均执行时间。对那些执行时  间非常小的代码很有用
-%who、% who_ls、% whos 显示interactive命名空间中定义的变量，信息级别 / 冗余度可变
-%xdel variable 删除variable，并尝试清除其在IPython中的对象上的一切引用
-</code></pre><h2 id="搜索并重用命令历史"><a href="#搜索并重用命令历史" class="headerlink" title="搜索并重用命令历史"></a>搜索并重用命令历史</h2><pre><code>上箭头键：搜索出命令历史中第一个与你输入的字符相匹配的命令。多次按将会在历史中不断搜索。
-下箭头键：子命令历史中向前搜索。
-Ctrl - R：部分增量搜素，循环在命令历史中搜素与输入相符的行。
-</code></pre><h2 id="输入和输出变量"><a href="#输入和输出变量" class="headerlink" title="输入和输出变量"></a>输入和输出变量</h2><pre><code>%hist 打印输入历史
-%reset 清空interactive命名空间，可选择是否清空输入和输出缓存
-%xdel 从IPython中移除特定对象的一切引用
-</code></pre><h2 id="记录输入和输出"><a href="#记录输入和输出" class="headerlink" title="记录输入和输出"></a>记录输入和输出</h2><pre><code>执行 % logstart能够开始记录控制台回话，包括输入和输出。与之配合的命令有：% logoff、% logon、% logstate、% logstop
-</code></pre><h2 id="与系统相关的命令："><a href="#与系统相关的命令：" class="headerlink" title="与系统相关的命令："></a>与系统相关的命令：</h2><pre><code>!cmd 在系统shell中执行cmd
-output =!cmd args 执行cmd，并将结果放在output中
-%bookmark 使用IPython的目录书签系统
-%cd directory 更改工作目录
-%pwd 返回系统当前工作目录
-%env 以字典形式返回系统环境变量
-</code></pre><h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><pre><code>在IPython中以感叹号(!)开头的命令表示其后的所有内容将会在系统shell中执行。
-使用！时，还允许使用当前环境中定义的Python值，只需在变量名前加上美元($)符号即可：
-foo = &apos;54678&apos;
-!mkdir $foo
-</code></pre><h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><pre><code>%bookmark pys &apos;C:/User/xxx/PyWorkSpace&apos;
-定义好书签之后，就可以在执行魔术命令 % cd时使用这些书签了：
-cd pys
-列出所有书签：
-%bookmark - l
-书签名与目录冲突
-%bookmark - b pys  # 强制使用书签目录
-</code></pre>
+            <h2 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h2><p>环境是linux</p>
+<p>先安装一些依赖软件
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install python-devel</div><div class="line">yum install libffi-devel</div><div class="line">yum install openssl-devel</div></pre></td></tr></table></figure></p>
+<p>然后安装pyopenssl库
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install pyopenssl</div></pre></td></tr></table></figure></p>
+<p>安装xlml
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install python-lxml</div><div class="line">yum install libxml2-devel</div><div class="line">yum install libxslt-devel</div></pre></td></tr></table></figure></p>
+<p>安装service-identity
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install service-identity</div></pre></td></tr></table></figure></p>
+<p>安装twisted
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install scrapy</div></pre></td></tr></table></figure></p>
+<p>安装scrapy
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install scrapy -U</div></pre></td></tr></table></figure></p>
+<p>环境 window
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pip install (pywin32_downloaded_from_ldf).whl</div><div class="line">pip install (twisted_downloaded_from_lfd).whl</div><div class="line">pip install twisted-win</div><div class="line">python C:\Python35\Scripts\pywin32_postinstall.py -install</div><div class="line">pip install scrapy</div></pre></td></tr></table></figure></p>
+
           
         
       
@@ -1662,7 +1568,7 @@ cd pys
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/logging.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/python 反爬虫策略.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -1684,8 +1590,8 @@ cd pys
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/logging.html" itemprop="url">
-                  logging
+                <a class="post-title-link" href="/2018/03/30/python/python 反爬虫策略.html" itemprop="url">
+                  python 反爬虫策略
                 </a>
               
             
@@ -1701,8 +1607,8 @@ cd pys
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -1719,7 +1625,7 @@ cd pys
 
           
           
-             <span id="/2017/10/23/python/logging.html" class="leancloud_visitors" data-flag-title="logging">
+             <span id="/2018/03/30/python/python 反爬虫策略.html" class="leancloud_visitors" data-flag-title="python 反爬虫策略">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1750,74 +1656,62 @@ cd pys
       
         
           
-            <h1 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h1><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>import logging
+            <p>python 反爬虫策略</p>
+<ol>
+<li>.限制IP地址单位时间的访问次数 ：
+分析：没有哪个常人一秒钟内能访问相同网站5次，除非是程序访问，而有这种喜好的，就剩下搜索引擎爬虫和讨厌的采集器了。
+弊端：一刀切，这同样会阻止搜索引擎对网站的收录
+适用网站：不太依靠搜索引擎的网站
+采集器会怎么做：减少单位时间的访问次数，减低采集效率</li>
+<li>屏蔽ip
+分析：通过后台计数器，记录来访者ip和访问频率，人为分析来访记录，屏蔽可疑Ip。
+弊端：似乎没什么弊端，就是站长忙了点
+适用网站：所有网站，且站长能够知道哪些是google或者百度的机器人
+采集器会怎么做：打游击战呗！利用ip代理采集一次换一次，不过会降低采集器的效率和网速(用代理嘛)。</li>
+<li>利用js加密网页内容
+Note:这个方法我没接触过，只是从别处看来
+分析：不用分析了，搜索引擎爬虫和采集器通杀
+适用网站：极度讨厌搜索引擎和采集器的网站
+采集器会这么做：你那么牛，都豁出去了，他就不来采你了</li>
+<li>网页里隐藏网站版权或者一些随机垃圾文字，这些文字风格写在css文件中
+分析：虽然不能防止采集，但是会让采集后的内容充满了你网站的版权说明或者一些垃圾文字，因为一般采集器不会同时采集你的css文件，那些文字没了风格，就显示出来了。
+适用网站：所有网站
+采集器会怎么做：对于版权文字，好办，替换掉。对于随机的垃圾文字，没办法，勤快点了。</li>
+<li>用户登录才能访问网站内容 
+分析：搜索引擎爬虫不会对每个这样类型的网站设计登录程序。听说采集器可以针对某个网站设计模拟用户登录提交表单行为。
+适用网站：极度讨厌搜索引擎，且想阻止大部分采集器的网站
+采集器会怎么做：制作拟用户登录提交表单行为的模块</li>
+<li>利用脚本语言做分页(隐藏分页)
+分析：还是那句，搜索引擎爬虫不会针对各种网站的隐藏分页进行分析，这影响搜索引擎对其收录。但是，采集者在编写采集规则时，要分析目标网页代码，懂点脚本知识的人，就会知道分页的真实链接地址。
+适用网站：对搜索引擎依赖度不高的网站，还有，采集你的人不懂脚本知识
+采集器会怎么做：应该说采集者会怎么做，他反正都要分析你的网页代码，顺便分析你的分页脚本，花不了多少额外时间。</li>
+<li>防盗链措施 (只允许通过本站页面连接查看，如：Request.ServerVariables(“HTTP_REFERER“) )
+分析：asp和php可以通过读取请求的HTTP_REFERER属性，来判断该请求是否来自本网站，从而来限制采集器，同样也限制了搜索引擎爬虫，严重影响搜索引擎对网站部分防盗链内容的收录。
+适用网站：不太考虑搜索引擎收录的网站
+采集器会怎么做：伪装HTTP_REFERER嘛，不难。</li>
+<li>全flash、图片或者pdf来呈现网站内容
+分析：对搜索引擎爬虫和采集器支持性不好，这个很多懂点seo的人都知道
+适用网站：媒体设计类并且不在意搜索引擎收录的网站
+采集器会怎么做：不采了，走人</li>
+<li>网站随机采用不同模版
+分析：因为采集器是根据网页结构来定位所需要的内容，一旦先后两次模版更换，采集规则就失效，不错。而且这样对搜索引擎爬虫没影响。
+适用网站：动态网站，并且不考虑用户体验。
+采集器会怎么做：一个网站模版不可能多于10个吧，每个模版弄一个规则就行了，不同模版采用不同采集规则。如果多于10个模版了，既然目标网站都那么费劲的更换模版，成全他，撤。</li>
+<li>采用动态不规则的html标签
+分析：这个比较变态。考虑到html标签内含空格和不含空格效果是一样的，所以&lt; div &gt;和&lt; div &gt;对于页面显示效果一样，但是作为采集器的标记就是两个不同标记了。如果每次页面的html标签内空格数随机，那么
+采集规则就失效了。但是，这对搜索引擎爬虫没多大影响。
+适合网站：所有动态且不想遵守网页设计规范的网站。
+采集器会怎么做：还是有对策的，现在html cleaner还是很多的，先清理了html标签，然后再写采集规则；应该用采集规则前先清理html标签，还是能够拿到所需数据</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>ip，账号频率，自动限速 得到延迟delay con 线程数</li>
+<li>设置 referer user - agent</li>
+<li>js selenium splash 分析一些参数</li>
+<li>登录 cookie</li>
+<li>验证码，包括图像验证码、拖动验证码等等<h1 id="爬虫技能书"><a href="#爬虫技能书" class="headerlink" title="爬虫技能书"></a>爬虫技能书</h1><img src="./images/%E7%88%AC%E8%99%AB%E6%8A%80%E8%83%BD%E6%A0%91_1.png" alt="enter description here" title="爬虫技能树"></li>
+</ol>
 
-# 创建一个logger
-logger = logging.getLogger(&apos;mylogger&apos;)
-logger.setLevel(logging.DEBUG)
-
-# 创建一个handler，用于写入日志文件
-fh = logging.FileHandler(&apos;d://test.log&apos;)
-fh.setLevel(logging.DEBUG)
-
-# 再创建一个handler，用于输出到控制台
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-# 定义handler的输出格式
-formatter = logging.Formatter(&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;)
-fh.setFormatter(formatter)
-ch.setFormatter(formatter)
-
-# 给logger添加handler
-logger.addHandler(fh)
-logger.addHandler(ch)
-
-# 记录一条日志
-logger.info(&apos;foorbar&apos;)
-</code></pre><h2 id="导入配置"><a href="#导入配置" class="headerlink" title="导入配置"></a>导入配置</h2><pre><code>import logging
-from logging.config import dictConfig
-
-logging_config = dict(
-    version = 1,
-    formatters = {
-        &apos;f&apos;: {&apos;format&apos;:
-              &apos;%(asctime)s %(name)-12s %(levelname)-8s %(message)s&apos;}
-        },
-    handlers = {
-        &apos;h&apos;: {&apos;class&apos;: &apos;logging.StreamHandler&apos;,
-              &apos;formatter&apos;: &apos;f&apos;,
-              &apos;level&apos;: logging.DEBUG}
-        },
-    loggers = {
-        &apos;root&apos;: {&apos;handlers&apos;: [&apos;h&apos;],
-                 &apos;level&apos;: logging.DEBUG}
-        }
-)
-
-dictConfig(logging_config)
-
-logger = logging.getLogger()
-logger.debug(&apos;often makes a very good meal of %s&apos;, &apos;visiting tourists&apos;)
-</code></pre><h2 id="logging基本配置"><a href="#logging基本配置" class="headerlink" title="logging基本配置"></a>logging基本配置</h2><pre><code>import logging
-# 创建一个log.log日志文件
-logging.basicConfig(filename=&apos;d:\\log.log&apos;,
-                    # 格式化的字符串
-                    format=&apos;%(asctime)s - %(name)s - %(levelname)s - %(module)s: %(message)s&apos;,
-                    # 时间
-                    datefmt=&apos;%Y-%m-%d %H:%M:%S %p&apos;,
-                    # 错误级别
-                    level=logging.DEBUG
-                    )
-filemode=&apos;a&apos;
-
-logging.critical(&apos;critical&apos;)
-logging.error(&apos;error&apos;)
-logging.warning(&apos;warning&apos;)
-logging.info(&apos;info&apos;)
-logging.debug(&apos;debug&apos;)
-logging.log(logging.INFO, &apos;NOTSET&apos;)
-</code></pre>
           
         
       
@@ -1857,7 +1751,7 @@ logging.log(logging.INFO, &apos;NOTSET&apos;)
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/注册表 pyregedit.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/scrapy item.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -1879,8 +1773,8 @@ logging.log(logging.INFO, &apos;NOTSET&apos;)
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/注册表 pyregedit.html" itemprop="url">
-                  注册表 pyregedit
+                <a class="post-title-link" href="/2018/03/30/python/scrapy item.html" itemprop="url">
+                  scrapy item
                 </a>
               
             
@@ -1896,8 +1790,8 @@ logging.log(logging.INFO, &apos;NOTSET&apos;)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -1914,7 +1808,7 @@ logging.log(logging.INFO, &apos;NOTSET&apos;)
 
           
           
-             <span id="/2017/10/23/python/注册表 pyregedit.html" class="leancloud_visitors" data-flag-title="注册表 pyregedit">
+             <span id="/2018/03/30/python/scrapy item.html" class="leancloud_visitors" data-flag-title="scrapy item">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1945,189 +1839,52 @@ logging.log(logging.INFO, &apos;NOTSET&apos;)
       
         
           
-            <h1 id="注册表-pyregedit"><a href="#注册表-pyregedit" class="headerlink" title="注册表 pyregedit"></a>注册表 pyregedit</h1><h2 id="pyregedit"><a href="#pyregedit" class="headerlink" title="pyregedit"></a>pyregedit</h2><pre><code>import win32api
-import win32con
-import os
+            <p>#Item</p>
+<p>Item是保存结构数据的地方，Scrapy可以将解析结果以字典形式返回，但是Python中字典缺少结构，在大型爬虫系统中很不方便。</p>
+<p>Item提供了类字典的API，并且可以很方便的声明字段，很多Scrapy组件可以利用Item的其他信息。</p>
+<h2 id="定义Item"><a href="#定义Item" class="headerlink" title="定义Item"></a>定义Item</h2><p>定义Item非常简单，只需要继承<code>scrapy.Item</code>类，并将所有字段都定义为<code>scrapy.Field</code>类型即可
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    name = scrapy.Field()</div><div class="line">    price = scrapy.Field()</div><div class="line">    stock = scrapy.Field()</div><div class="line">    last_updated = scrapy.Field(serializer=str)</div></pre></td></tr></table></figure></p>
+<h2 id="Item-Fields"><a href="#Item-Fields" class="headerlink" title="Item Fields"></a>Item Fields</h2><p><code>Field</code>对象可用来对每个字段指定元数据。例如上面<code>last_updated</code>的序列化函数指定为<code>str</code>，可任意指定元数据，不过每种元数据对于不同的组件意义不一样。</p>
+<h2 id="Item-Loader"><a href="#Item-Loader" class="headerlink" title="Item Loader"></a>Item Loader</h2><p>Item Loader为我们提供了生成Item的相当便利的方法。Item为抓取的数据提供了容器，而Item Loader可以让我们非常方便的将输入填充到容器中。</p>
+<p>下面我们通过一个例子来展示一般使用方法：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy.loader <span class="keyword">import</span> ItemLoader</div><div class="line"><span class="keyword">from</span> myproject.items <span class="keyword">import</span> Product</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    l = ItemLoader(item=Product(), response=response)</div><div class="line">    l.add_xpath(<span class="string">'name'</span>, <span class="string">'//div[@class="product_name"]'</span>)</div><div class="line">    l.add_xpath(<span class="string">'name'</span>, <span class="string">'//div[@class="product_title"]'</span>)</div><div class="line">    l.add_xpath(<span class="string">'price'</span>, <span class="string">'//p[@id="price"]'</span>)</div><div class="line">    l.add_css(<span class="string">'stock'</span>, <span class="string">'p#stock]'</span>)</div><div class="line">    l.add_value(<span class="string">'last_updated'</span>, <span class="string">'today'</span>) <span class="comment"># you can also use literal values</span></div><div class="line">    <span class="keyword">return</span> l.load_item()</div></pre></td></tr></table></figure></p>
+<p>注意上面的<code>name</code>字段是从两个xpath路径添累加后得到。</p>
+<h2 id="输入-输出处理器"><a href="#输入-输出处理器" class="headerlink" title="输入/输出处理器"></a>输入/输出处理器</h2><p>每个Item Loader对每个<code>Field</code>都有一个输入处理器和一个输出处理器。输入处理器在数据被接受到时执行，当数据收集完后调用<code>ItemLoader.load_item()</code>时再执行输出处理器，返回最终结果。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">l = ItemLoader(Product(), some_selector)</div><div class="line">l.add_xpath(<span class="string">'name'</span>, xpath1) <span class="comment"># (1)</span></div><div class="line">l.add_xpath(<span class="string">'name'</span>, xpath2) <span class="comment"># (2)</span></div><div class="line">l.add_css(<span class="string">'name'</span>, css) <span class="comment"># (3)</span></div><div class="line">l.add_value(<span class="string">'name'</span>, <span class="string">'test'</span>) <span class="comment"># (4)</span></div><div class="line"><span class="keyword">return</span> l.load_item() <span class="comment"># (5)</span></div></pre></td></tr></table></figure></p>
+<p>执行流程是这样的：</p>
+<ol>
+<li><code>xpath1</code>中的数据被提取出来，然后传输到<code>name</code>字段的输入处理器中，在输入处理器处理完后生成结果放在Item Loader里面(这时候没有赋值给item)</li>
+<li><code>xpath2</code>数据被提取出来，然后传输给(1)中同样的输入处理器，因为它们都是<code>name</code>字段的处理器，然后处理结果被附加到(1)的结果后面</li>
+<li>跟2一样</li>
+<li>跟3一样，不过这次是直接的字面字符串值，先转换成一个单元素的可迭代对象再传给输入处理器</li>
+<li>上面4步的数据被传输给<code>name</code>的输出处理器，将最终的结果赋值给<code>name</code>字段</li>
+</ol>
+<h2 id="自定义Item-Loader"><a href="#自定义Item-Loader" class="headerlink" title="自定义Item Loader"></a>自定义Item Loader</h2><p>使用类定义语法，下面是一个例子
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy.loader <span class="keyword">import</span> ItemLoader</div><div class="line"><span class="keyword">from</span> scrapy.loader.processors <span class="keyword">import</span> TakeFirst, MapCompose, Join</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductLoader</span><span class="params">(ItemLoader)</span>:</span></div><div class="line"></div><div class="line">    default_output_processor = TakeFirst()</div><div class="line"></div><div class="line">    name_in = MapCompose(unicode.title)</div><div class="line">    name_out = Join()</div><div class="line"></div><div class="line">    price_in = MapCompose(unicode.strip)</div><div class="line"></div><div class="line">    <span class="comment"># ...</span></div></pre></td></tr></table></figure></p>
+<p>通过<code>_in</code>和<code>_out</code>后缀来定义输入和输出处理器，并且还可以定义默认的<code>ItemLoader.default_input_processor</code>和<code>ItemLoader.default_input_processor</code>.</p>
+<h2 id="在Field定义中声明输入-输出处理器"><a href="#在Field定义中声明输入-输出处理器" class="headerlink" title="在Field定义中声明输入/输出处理器"></a>在Field定义中声明输入/输出处理器</h2><p>还有个地方可以非常方便的添加输入/输出处理器，那就是直接在Field定义中
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.loader.processors <span class="keyword">import</span> Join, MapCompose, TakeFirst</div><div class="line"><span class="keyword">from</span> w3lib.html <span class="keyword">import</span> remove_tags</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">filter_price</span><span class="params">(value)</span>:</span></div><div class="line">    <span class="keyword">if</span> value.isdigit():</div><div class="line">        <span class="keyword">return</span> value</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    name = scrapy.Field(</div><div class="line">        input_processor=MapCompose(remove_tags),</div><div class="line">        output_processor=Join(),</div><div class="line">    )</div><div class="line">    price = scrapy.Field(</div><div class="line">        input_processor=MapCompose(remove_tags, filter_price),</div><div class="line">        output_processor=TakeFirst(),</div><div class="line">    )</div></pre></td></tr></table></figure></p>
+<p>优先级：</p>
+<ol>
+<li>在Item Loader中定义的<code>field_in</code>和<code>field_out</code></li>
+<li>Filed元数据(<code>input_processor</code>和<code>output_processor</code>关键字)</li>
+<li>Item Loader中的默认的</li>
+</ol>
+<p>Tips：一般来讲，将输入处理器定义在Item Loader的定义中<code>field_in</code>，然后将输出处理器定义在Field元数据中</p>
+<h2 id="Item-Loader上下文"><a href="#Item-Loader上下文" class="headerlink" title="Item Loader上下文"></a>Item Loader上下文</h2><p>Item Loader上下文被所有输入/输出处理器共享，比如你有一个解析长度的函数
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_length</span><span class="params">(text, loader_context)</span>:</span></div><div class="line">    unit = loader_context.get(<span class="string">'unit'</span>, <span class="string">'m'</span>)</div><div class="line">    <span class="comment"># ... length parsing code goes here ...</span></div><div class="line">    <span class="keyword">return</span> parsed_length</div></pre></td></tr></table></figure></p>
+<p>初始化和修改上下文的值
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loader = ItemLoader(product)</div><div class="line">loader.context[<span class="string">'unit'</span>] = <span class="string">'cm'</span></div><div class="line"></div><div class="line">loader = ItemLoader(product, unit=<span class="string">'cm'</span>)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductLoader</span><span class="params">(ItemLoader)</span>:</span></div><div class="line">    length_out = MapCompose(parse_length, unit=<span class="string">'cm'</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="内置的处理器"><a href="#内置的处理器" class="headerlink" title="内置的处理器"></a>内置的处理器</h2><ol>
+<li><code>Identity</code> 啥也不做</li>
+<li><code>TakeFirst</code> 返回第一个非空值，通常用作输出处理器</li>
+<li><code>Join</code> 将结果连起来，默认使用空格’ ‘</li>
+<li><code>Compose</code> 将函数链接起来形成管道流，产生最后的输出</li>
+<li><code>MapCompose</code> 跟上面的<code>Compose</code>类似，区别在于内部结果在函数中的传递方式.
+它的输入值是可迭代的，首先将第一个函数依次作用于所有值，产生新的可迭代输入，作为第二个函数的输入，最后生成的结果连起来返回最终值，一般用在输入处理器中。</li>
+<li><code>SelectJmes</code> 使用json路径来查询值并返回结果</li>
+</ol>
 
-# 权限设置
-REG_FLAGS = win32con.WRITE_OWNER | win32con.KEY_WOW64_64KEY | win32con.KEY_ALL_ACCESS
-
-#root (根节点)
-HKEY_CLASSES_ROOT = win32con.HKEY_CLASSES_ROOT
-HKEY_CURRENT_USER = win32con.HKEY_CURRENT_USER
-HKEY_LOCAL_MACHINE = win32con.HKEY_LOCAL_MACHINE
-HKEY_USERS = win32con.HKEY_USERS
-HKEY_CURRENT_CONFIG = win32con.HKEY_CURRENT_CONFIG
-
-# value type (值类型)
-REG_SZ = win32con.REG_SZ
-REG_BINARY = win32con.REG_BINARY
-REG_DWORD = win32con.REG_DWORD
-REG_QWORD = win32con.REG_QWORD
-REG_MULTI_SZ = win32con.REG_MULTI_SZ
-REG_EXPAND_SZ = win32con.REG_EXPAND_SZ
-
-class RegEdit():
-    def __init__(self, root, path):
-        &quot;&quot;&quot;init method (key root, key path)&quot;&quot;&quot;
-        self.root = root
-        self.path = path
-
-    # 判断键是否存在
-    def check_key(self):
-        &quot;&quot;&quot;check key is exist or not&quot;&quot;&quot;
-        try:
-            key = self.get_key()
-            key.close()
-            return True
-        except Exception as e:
-            return False
-
-    # 获取键
-    def get_key(self):
-        &quot;&quot;&quot;get key object&quot;&quot;&quot;
-        key = win32api.RegOpenKeyEx(self.root, self.path, 0, REG_FLAGS)
-        return key
-
-    # 获取子键名称
-    def get_sub_keys(self):
-        &quot;&quot;&quot;get key&apos;s sub keys&quot;&quot;&quot;
-        key = self.get_key()
-
-        for item in win32api.RegEnumKeyEx(key):
-            yield item[0]
-        key.close()
-
-    # 获取全部值
-    def get_values(self):
-        &quot;&quot;&quot;get key&apos;s values&quot;&quot;&quot;
-        key = self.get_key()
-
-        try:
-            i = 0
-            while True:
-                # 循环枚举值
-                yield win32api.RegEnumValue(key, i)
-                i += 1
-        except Exception as e:
-            pass
-        finally:
-            key.close()
-
-    # 根据名称获取值
-    def get_value(self, value_name):
-        &quot;&quot;&quot;get value by name&quot;&quot;&quot;
-        key = self.get_key()
-        value, value_type = win32api.RegQueryValueEx(key, value_name)
-        return value, value_type
-
-    # 创建键
-    def create_key(self):
-        &quot;&quot;&quot;create and return a key&quot;&quot;&quot;
-        key, _ = win32api.RegCreateKeyEx(self.root, self.path, REG_FLAGS)
-        return key
-
-    # 创建子键
-    def create_sub_key(self, sub_key_name):
-        &quot;&quot;&quot;create a sub key&quot;&quot;&quot;
-        sub_key_path = os.path.join(self.path, sub_key_name)
-        sub_key, _ = win32api.RegCreateKeyEx(
-            self.root, sub_key_path, REG_FLAGS)
-        return sub_key
-
-    # 创建值
-    def create_value(self, value_name, value_type=REG_SZ, value_value=&apos;&apos;):
-        &quot;&quot;&quot;create value&quot;&quot;&quot;
-        key = self.create_key()
-        win32api.RegSetValueEx(key, value_name, 0, value_type, value_value)
-
-        key.close()
-        return True
-
-    # 删除当前键
-    def delete_current_key(self):
-        &quot;&quot;&quot;delete current key&quot;&quot;&quot;
-        parent, key_name = os.path.split(self.path)
-        key_parent = win32api.RegOpenKeyEx(self.root, parent, 0, REG_FLAGS)
-        win32api.RegDeleteKeyEx(key_parent, key_name)
-
-        key_parent.close()
-        return True
-
-    # 删除子键
-    def delete_sub_key(self, sub_key_name):
-        &quot;&quot;&quot;delete sub key&quot;&quot;&quot;
-        key = self.get_key()
-        win32api.RegDeleteKeyEx(key, sub_key_name)
-
-        key.close()
-        return True
-
-    # 删除值
-    def delete_value(self, value_name):
-        &quot;&quot;&quot;delete a value item&quot;&quot;&quot;
-        key = self.get_key()
-        win32api.RegDeleteValue(key, value_name)
-
-        key.close()
-        return True
-</code></pre><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><pre><code>import pyregedit
-root = pyregedit.HKEY_LOCAL_MACHINE
-path = r&quot;SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002bE10318}\0002&quot;
-reg = pyregedit.RegEdit(root, path)
-#判断键是否存在
-if reg.check_key():
-    #获取键(可用于其他操作)
-    key = reg.get_key()
-else:
-    #创建键
-    key = reg.create_key()
-
-#创建值
-reg.create_value(&apos;NetworkAddress&apos;, pyregedit.REG_SZ, &apos;020E2637D888&apos;)
-
-#创建子键
-reg.create_sub_key(&apos;sub_test&apos;)
-
-#获取子键名称列表
-print(list(reg.get_sub_keys()))
-
-#获取全部值
-print(list(reg.get_values()))
-
-#根据具体名称获取某个值的数据
-print(reg.get_value(&apos;NetworkAddress&apos;))
-
-#删除值
-reg.delete_value(&apos;test_name&apos;)
-
-#删除子键
-reg.delete_sub_key(&apos;sub_test&apos;)
-
-#删除当前键
-reg.delete_curretn_key()
-</code></pre><h2 id="改mac"><a href="#改mac" class="headerlink" title="改mac"></a>改mac</h2><pre><code>import random
-def randomMAC():
-    mac = [ 0x52, 0x54, 0x00,
-        random.randint(0x00, 0x7f),
-        random.randint(0x00, 0xff),
-        random.randint(0x00, 0xff) ]
-    return &apos;&apos;.join(map(lambda x: &quot;%02x&quot; % x, mac)).upper()
-import pyregedit
-root = pyregedit.HKEY_LOCAL_MACHINE
-path = r&quot;SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002bE10318}\0002&quot;
-reg = pyregedit.RegEdit(root, path)
-mac=randomMAC()
-#创建值
-reg.create_value(&apos;NetworkAddress&apos;, pyregedit.REG_SZ, mac)
-print(reg.get_value(&apos;NetworkAddress&apos;))
-
-import shutil
-shutil.rmtree(r&apos;C:\Users\Administrator\AppData\Roaming\Lantern&apos;)
-print (&apos;ok&apos;)
-import requests
-r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
-</code></pre>
           
         
       
@@ -2167,7 +1924,7 @@ r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2017/10/23/python/pythonic.html">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/Item Pipeline.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="bo">
@@ -2189,8 +1946,8 @@ r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
             
               
                 
-                <a class="post-title-link" href="/2017/10/23/python/pythonic.html" itemprop="url">
-                  pythonic
+                <a class="post-title-link" href="/2018/03/30/python/Item Pipeline.html" itemprop="url">
+                  Item Pipeline
                 </a>
               
             
@@ -2206,8 +1963,8 @@ r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T21:07:53+08:00">
-                2017-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
               </time>
             
 
@@ -2224,7 +1981,7 @@ r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
 
           
           
-             <span id="/2017/10/23/python/pythonic.html" class="leancloud_visitors" data-flag-title="pythonic">
+             <span id="/2018/03/30/python/Item Pipeline.html" class="leancloud_visitors" data-flag-title="Item Pipeline">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2255,93 +2012,192 @@ r=requests.get(&apos;http://192.168.0.1/goform/SysToolReboot&apos;,timeout=4)
       
         
           
-            <h2 id="一行代码"><a href="#一行代码" class="headerlink" title="一行代码"></a>一行代码</h2><pre><code># 一行代码实现变量值互换
-a, b = 1, 2; a, b = b, a
+            <h1 id="Scrapy教程06-Item-Pipeline"><a href="#Scrapy教程06-Item-Pipeline" class="headerlink" title="Scrapy教程06- Item Pipeline"></a>Scrapy教程06- Item Pipeline</h1><p>当一个item被蜘蛛爬取到之后会被发送给Item Pipeline，然后多个组件按照顺序处理这个item。
+每个Item Pipeline组件其实就是一个实现了一个简单方法的Python类。他们接受一个item并在上面执行逻辑，还能决定这个item到底是否还要继续往下传输，如果不要了就直接丢弃。</p>
+<p>使用Item Pipeline的常用场景：</p>
+<ul>
+<li>清理HTML数据</li>
+<li>验证被抓取的数据(检查item是否包含某些字段)</li>
+<li>重复性检查(然后丢弃)</li>
+<li>将抓取的数据存储到数据库中</li>
+</ul>
+<h2 id="编写自己的Pipeline"><a href="#编写自己的Pipeline" class="headerlink" title="编写自己的Pipeline"></a>编写自己的Pipeline</h2><p>定义一个Python类，然后实现方法<code>process_item(self, item, spider)</code>即可，返回一个字典或Item，或者抛出<code>DropItem</code>异常丢弃这个Item。</p>
+<p>或者还可以实现下面几个方法：</p>
+<ul>
+<li><code>open_spider(self, spider)</code> 蜘蛛打开的时执行</li>
+<li><code>close_spider(self, spider)</code> 蜘蛛关闭时执行</li>
+<li><code>from_crawler(cls, crawler)</code> 可访问核心组件比如配置和信号，并注册钩子函数到Scrapy中</li>
+</ul>
+<h2 id="Item-Pipeline示例"><a href="#Item-Pipeline示例" class="headerlink" title="Item Pipeline示例"></a>Item Pipeline示例</h2><h3 id="价格验证"><a href="#价格验证" class="headerlink" title="价格验证"></a>价格验证</h3><p>我们通过一个价格验证例子来看看怎样使用
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy.exceptions <span class="keyword">import</span> DropItem</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PricePipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    vat_factor = <span class="number">1.15</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        <span class="keyword">if</span> item[<span class="string">'price'</span>]:</div><div class="line">            <span class="keyword">if</span> item[<span class="string">'price_excludes_vat'</span>]:</div><div class="line">                item[<span class="string">'price'</span>] = item[<span class="string">'price'</span>] * self.vat_factor</div><div class="line">            <span class="keyword">return</span> item</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">raise</span> DropItem(<span class="string">"Missing price in %s"</span> % item)</div></pre></td></tr></table></figure></p>
+<h3 id="将item写入json文件"><a href="#将item写入json文件" class="headerlink" title="将item写入json文件"></a>将item写入json文件</h3><p>下面的这个Pipeline将所有的item写入到一个单独的json文件，一行一个item
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> json</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JsonWriterPipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.file = open(<span class="string">'items.jl'</span>, <span class="string">'wb'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        line = json.dumps(dict(item)) + <span class="string">"\n"</span></div><div class="line">        self.file.write(line)</div><div class="line">        <span class="keyword">return</span> item</div></pre></td></tr></table></figure></p>
+<h3 id="将item存储到MongoDB中"><a href="#将item存储到MongoDB中" class="headerlink" title="将item存储到MongoDB中"></a>将item存储到MongoDB中</h3><p>这个例子使用<a href="http://api.mongodb.org/python/current/" target="_blank" rel="external">pymongo</a>来演示怎样讲item保存到MongoDB中。
+MongoDB的地址和数据库名在配置中指定，这个例子主要是向你展示怎样使用<code>from_crawler()</code>方法，以及如何清理资源。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MongoPipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    collection_name = <span class="string">'scrapy_items'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, mongo_uri, mongo_db)</span>:</span></div><div class="line">        self.mongo_uri = mongo_uri</div><div class="line">        self.mongo_db = mongo_db</div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_crawler</span><span class="params">(cls, crawler)</span>:</span></div><div class="line">        <span class="keyword">return</span> cls(</div><div class="line">            mongo_uri=crawler.settings.get(<span class="string">'MONGO_URI'</span>),</div><div class="line">            mongo_db=crawler.settings.get(<span class="string">'MONGO_DATABASE'</span>, <span class="string">'items'</span>)</div><div class="line">        )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.client = pymongo.MongoClient(self.mongo_uri)</div><div class="line">        self.db = self.client[self.mongo_db]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.client.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        self.db[self.collection_name].insert(dict(item))</div><div class="line">        <span class="keyword">return</span> item</div></pre></td></tr></table></figure></p>
+<h3 id="重复过滤器"><a href="#重复过滤器" class="headerlink" title="重复过滤器"></a>重复过滤器</h3><p>假设我们的item里面的id字典是唯一的，但是我们的蜘蛛返回了多个相同id的item
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy.exceptions <span class="keyword">import</span> DropItem</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DuplicatesPipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.ids_seen = set()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        <span class="keyword">if</span> item[<span class="string">'id'</span>] <span class="keyword">in</span> self.ids_seen:</div><div class="line">            <span class="keyword">raise</span> DropItem(<span class="string">"Duplicate item found: %s"</span> % item)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.ids_seen.add(item[<span class="string">'id'</span>])</div><div class="line">            <span class="keyword">return</span> item</div></pre></td></tr></table></figure></p>
+<h2 id="激活一个Item-Pipeline组件"><a href="#激活一个Item-Pipeline组件" class="headerlink" title="激活一个Item Pipeline组件"></a>激活一个Item Pipeline组件</h2><p>你必须在配置文件中将你需要激活的Pipline组件添加到<code>ITEM_PIPELINES</code>中
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ITEM_PIPELINES = &#123;</div><div class="line">    <span class="string">'myproject.pipelines.PricePipeline'</span>: <span class="number">300</span>,</div><div class="line">    <span class="string">'myproject.pipelines.JsonWriterPipeline'</span>: <span class="number">800</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>后面的数字表示它的执行顺序，从低到高执行，范围0-1000</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
 
 
-# 一行代码解决FizzBuzz问题: 打印数字1到100, 3的倍数打印“Fizz”来替换这个数, 5的倍数打印“Buzz”, 既是3又是5的倍数的打印“FizzBuzz”
-print(&apos; &apos;.join([&quot;fizz&quot;[x % 3 * 4:]+&quot;buzz&quot;[x % 5 * 4:] or str(x) for x in range(1, 101)]))
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-# 一行代码输出特定字符&quot;Love&quot;拼成的心形
-print(&apos;\n&apos;.join([&apos;&apos;.join([(&apos;Love&apos;[(x-y) % len(&apos;Love&apos;)] if ((x*0.05)**2+(y*0.1)**2-1)**3-(x*0.05)**2*(y*0.1)**3 &lt;= 0 else &apos; &apos;) for x in range(-30, 30)]) for y in range(30, -30, -1)]))
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/动态配置爬虫.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="满天星辰">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/30/python/动态配置爬虫.html" itemprop="url">
+                  动态配置爬虫
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/30/python/动态配置爬虫.html" class="leancloud_visitors" data-flag-title="动态配置爬虫">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
 
 
-# 一行代码输出Mandelbrot图像: Mandelbrot图像中的每个位置都对应于公式N=x+y*i中的一个复数
-print(&apos;\n&apos;.join([&apos;&apos;.join([&apos;*&apos;if abs((lambda a: lambda z, c, n: a(a, z, c, n))(lambda s, z, c, n: z if n == 0 else s(s, z*z+c, c, n-1))(0, 0.02*x+0.05j*y, 40)) &lt; 2 else &apos; &apos; for x in range(-80, 20)]) for y in range(-20, 20)]))
+    <div class="post-body" itemprop="articleBody">
 
+      
+      
 
-# 一行代码打印九九乘法表
-print(&apos;\n&apos;.join([&apos; &apos;.join([&apos;%s*%s=%-2s&apos; % (y, x, x*y) for y in range(1, x+1)]) for x in range(1, 10)]))
+      
+        
+          
+            <h1 id="Scrapy教程10-动态配置爬虫"><a href="#Scrapy教程10-动态配置爬虫" class="headerlink" title="Scrapy教程10- 动态配置爬虫"></a>Scrapy教程10- 动态配置爬虫</h1><p>有很多时候我们需要从多个网站爬取所需要的数据，比如我们想爬取多个网站的新闻，将其存储到数据库同一个表中。我们是不是要对每个网站都得去定义一个Spider类呢？
+其实不需要，我们可以通过维护一个规则配置表或者一个规则配置文件来动态增加或修改爬取规则，然后程序代码不需要更改就能实现多个网站爬取。</p>
+<p>要这样做，我们就不能再使用前面的<code>scrapy crawl test</code>这种命令了，我们需要使用编程的方式运行Scrapy spider，参考<a href="http://doc.scrapy.org/en/1.0/topics/practices.html#run-scrapy-from-a-script" target="_blank" rel="external">官方文档</a></p>
+<h3 id="脚本运行Scrapy"><a href="#脚本运行Scrapy" class="headerlink" title="脚本运行Scrapy"></a>脚本运行Scrapy</h3><p>可以利用scrapy提供的<a href="http://doc.scrapy.org/en/1.0/topics/api.html#topics-api" target="_blank" rel="external">核心API</a>通过编程方式启动scrapy，代替传统的<code>scrapy crawl</code>启动方式。</p>
+<p>Scrapy构建于Twisted异步网络框架基础之上，因此你需要在Twisted reactor里面运行。</p>
+<p>首先你可以使用<code>scrapy.crawler.CrawlerProcess</code>这个类来运行你的spider，这个类会为你启动一个Twisted reactor，并能配置你的日志和shutdown处理器。所有的scrapy命令都使用这个类。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.crawler <span class="keyword">import</span> CrawlerProcess</div><div class="line"><span class="keyword">from</span> scrapy.utils.project <span class="keyword">import</span> get_project_settings</div><div class="line"></div><div class="line">process = CrawlerProcess(get_project_settings())</div><div class="line"></div><div class="line">process.crawl(MySpider)</div><div class="line">process.start() <span class="comment"># the script will block here until the crawling is finished</span></div></pre></td></tr></table></figure></p>
+<p>然后你就可以直接执行这个脚本
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python run.py</div></pre></td></tr></table></figure></p>
+<p>另外一个功能更强大的类是<code>scrapy.crawler.CrawlerRunner</code>，推荐你使用这个
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.crawler <span class="keyword">import</span> CrawlerRunner</div><div class="line"><span class="keyword">from</span> scrapy.utils.log <span class="keyword">import</span> configure_logging</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    <span class="comment"># Your spider definition</span></div><div class="line">    ...</div><div class="line"></div><div class="line">configure_logging(&#123;<span class="string">'LOG_FORMAT'</span>: <span class="string">'%(levelname)s: %(message)s'</span>&#125;)</div><div class="line">runner = CrawlerRunner()</div><div class="line"></div><div class="line">d = runner.crawl(MySpider)</div><div class="line">d.addBoth(<span class="keyword">lambda</span> _: reactor.stop())</div><div class="line">reactor.run() <span class="comment"># the script will block here until the crawling is finished</span></div></pre></td></tr></table></figure></p>
+<h3 id="同一进程运行多个spider"><a href="#同一进程运行多个spider" class="headerlink" title="同一进程运行多个spider"></a>同一进程运行多个spider</h3><p>默认情况当你每次执行<code>scrapy crawl</code>命令时会创建一个新的进程。但我们可以使用核心API在同一个进程中同时运行多个spider
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</div><div class="line"><span class="keyword">from</span> scrapy.crawler <span class="keyword">import</span> CrawlerRunner</div><div class="line"><span class="keyword">from</span> scrapy.utils.log <span class="keyword">import</span> configure_logging</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySpider1</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    <span class="comment"># Your first spider definition</span></div><div class="line">    ...</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySpider2</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">    <span class="comment"># Your second spider definition</span></div><div class="line">    ...</div><div class="line"></div><div class="line">configure_logging()</div><div class="line">runner = CrawlerRunner()</div><div class="line">runner.crawl(MySpider1)</div><div class="line">runner.crawl(MySpider2)</div><div class="line">d = runner.join()</div><div class="line">d.addBoth(<span class="keyword">lambda</span> _: reactor.stop())</div><div class="line"></div><div class="line">reactor.run() <span class="comment"># the script will block here until all crawling jobs are finished</span></div></pre></td></tr></table></figure></p>
+<h3 id="定义规则表"><a href="#定义规则表" class="headerlink" title="定义规则表"></a>定义规则表</h3><p>好了言归正传，有了前面的脚本启动基础，就可以开始我们的动态配置爬虫了。
+我们的需求是这样的，从两个不同的网站爬取我们所需要的新闻文章，然后存储到article表中。</p>
+<p>首先我们需要定义规则表和文章表，通过动态的创建蜘蛛类，我们以后就只需要维护规则表即可了。这里我使用SQLAlchemy框架来映射数据库。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">Topic: 定义数据库模型实体</div><div class="line">Desc :</div><div class="line">"""</div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"></div><div class="line"><span class="keyword">from</span> sqlalchemy.engine.url <span class="keyword">import</span> URL</div><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine, Column, Integer, String, Text, DateTime</div><div class="line"><span class="keyword">from</span> coolscrapy.settings <span class="keyword">import</span> DATABASE</div><div class="line"></div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleRule</span><span class="params">(Base)</span>:</span></div><div class="line">    <span class="string">"""自定义文章爬取规则"""</span></div><div class="line">    __tablename__ = <span class="string">'article_rule'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>)</div><div class="line">    <span class="comment"># 规则名称</span></div><div class="line">    name = Column(String(<span class="number">30</span>))</div><div class="line">    <span class="comment"># 运行的域名列表，逗号隔开</span></div><div class="line">    allow_domains = Column(String(<span class="number">100</span>))</div><div class="line">    <span class="comment"># 开始URL列表，逗号隔开</span></div><div class="line">    start_urls = Column(String(<span class="number">100</span>))</div><div class="line">    <span class="comment"># 下一页的xpath</span></div><div class="line">    next_page = Column(String(<span class="number">100</span>))</div><div class="line">    <span class="comment"># 文章链接正则表达式(子串)</span></div><div class="line">    allow_url = Column(String(<span class="number">200</span>))</div><div class="line">    <span class="comment"># 文章链接提取区域xpath</span></div><div class="line">    extract_from = Column(String(<span class="number">200</span>))</div><div class="line">    <span class="comment"># 文章标题xpath</span></div><div class="line">    title_xpath = Column(String(<span class="number">100</span>))</div><div class="line">    <span class="comment"># 文章内容xpath</span></div><div class="line">    body_xpath = Column(Text)</div><div class="line">    <span class="comment"># 发布时间xpath</span></div><div class="line">    publish_time_xpath = Column(String(<span class="number">30</span>))</div><div class="line">    <span class="comment"># 文章来源</span></div><div class="line">    source_site = Column(String(<span class="number">30</span>))</div><div class="line">    <span class="comment"># 规则是否生效</span></div><div class="line">    enable = Column(Integer)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(Base)</span>:</span></div><div class="line">    <span class="string">"""文章类"""</span></div><div class="line">    __tablename__ = <span class="string">'articles'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>)</div><div class="line">    url = Column(String(<span class="number">100</span>))</div><div class="line">    title = Column(String(<span class="number">100</span>))</div><div class="line">    body = Column(Text)</div><div class="line">    publish_time = Column(String(<span class="number">30</span>))</div><div class="line">    source_site = Column(String(<span class="number">30</span>))</div></pre></td></tr></table></figure></p>
+<h3 id="定义文章Item"><a href="#定义文章Item" class="headerlink" title="定义文章Item"></a>定义文章Item</h3><p>这个很简单了，没什么需要说明的
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">    title = scrapy.Field()</div><div class="line">    url = scrapy.Field()</div><div class="line">    body = scrapy.Field()</div><div class="line">    publish_time = scrapy.Field()</div><div class="line">    source_site = scrapy.Field()</div></pre></td></tr></table></figure></p>
+<h3 id="定义ArticleSpider"><a href="#定义ArticleSpider" class="headerlink" title="定义ArticleSpider"></a>定义ArticleSpider</h3><p>接下来我们将定义爬取文章的蜘蛛，这个spider会使用一个Rule实例来初始化，然后根据Rule实例中的xpath规则来获取相应的数据。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> coolscrapy.utils <span class="keyword">import</span> parse_text</div><div class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule</div><div class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor</div><div class="line"><span class="keyword">from</span> coolscrapy.items <span class="keyword">import</span> Article</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleSpider</span><span class="params">(CrawlSpider)</span>:</span></div><div class="line">    name = <span class="string">"article"</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, rule)</span>:</span></div><div class="line">        self.rule = rule</div><div class="line">        self.name = rule.name</div><div class="line">        self.allowed_domains = rule.allow_domains.split(<span class="string">","</span>)</div><div class="line">        self.start_urls = rule.start_urls.split(<span class="string">","</span>)</div><div class="line">        rule_list = []</div><div class="line">        <span class="comment"># 添加`下一页`的规则</span></div><div class="line">        <span class="keyword">if</span> rule.next_page:</div><div class="line">            rule_list.append(Rule(LinkExtractor(restrict_xpaths=rule.next_page)))</div><div class="line">        <span class="comment"># 添加抽取文章链接的规则</span></div><div class="line">        rule_list.append(Rule(LinkExtractor(</div><div class="line">            allow=[rule.allow_url],</div><div class="line">            restrict_xpaths=[rule.extract_from]),</div><div class="line">            callback=<span class="string">'parse_item'</span>))</div><div class="line">        self.rules = tuple(rule_list)</div><div class="line">        super(ArticleSpider, self).__init__()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, response)</span>:</span></div><div class="line">        self.log(<span class="string">'Hi, this is an article page! %s'</span> % response.url)</div><div class="line"></div><div class="line">        article = Article()</div><div class="line">        article[<span class="string">"url"</span>] = response.url</div><div class="line"></div><div class="line">        title = response.xpath(self.rule.title_xpath).extract()</div><div class="line">        article[<span class="string">"title"</span>] = parse_text(title, self.rule.name, <span class="string">'title'</span>)</div><div class="line"></div><div class="line">        body = response.xpath(self.rule.body_xpath).extract()</div><div class="line">        article[<span class="string">"body"</span>] = parse_text(body, self.rule.name, <span class="string">'body'</span>)</div><div class="line"></div><div class="line">        publish_time = response.xpath(self.rule.publish_time_xpath).extract()</div><div class="line">        article[<span class="string">"publish_time"</span>] = parse_text(publish_time, self.rule.name, <span class="string">'publish_time'</span>)</div><div class="line"></div><div class="line">        article[<span class="string">"source_site"</span>] = self.rule.source_site</div><div class="line"></div><div class="line">        <span class="keyword">return</span> article</div></pre></td></tr></table></figure></p>
+<p>要注意的是start_urls，rules等都初始化成了对象的属性，都由传入的rule对象初始化，parse_item方法中的抽取规则也都有rule对象提供。</p>
+<h3 id="编写pipeline存储到数据库中"><a href="#编写pipeline存储到数据库中" class="headerlink" title="编写pipeline存储到数据库中"></a>编写pipeline存储到数据库中</h3><p>我们还是使用SQLAlchemy来将文章Item数据存储到数据库中
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@contextmanager</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">session_scope</span><span class="params">(Session)</span>:</span></div><div class="line">    <span class="string">"""Provide a transactional scope around a series of operations."""</span></div><div class="line">    session = Session()</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">yield</span> session</div><div class="line">        session.commit()</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        session.rollback()</div><div class="line">        <span class="keyword">raise</span></div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        session.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleDataBasePipeline</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""保存文章到数据库"""</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        engine = db_connect()</div><div class="line">        create_news_table(engine)</div><div class="line">        self.Session = sessionmaker(bind=engine)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        <span class="string">"""This method is called when the spider is opened."""</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        a = Article(url=item[<span class="string">"url"</span>],</div><div class="line">                    title=item[<span class="string">"title"</span>].encode(<span class="string">"utf-8"</span>),</div><div class="line">                    publish_time=item[<span class="string">"publish_time"</span>].encode(<span class="string">"utf-8"</span>),</div><div class="line">                    body=item[<span class="string">"body"</span>].encode(<span class="string">"utf-8"</span>),</div><div class="line">                    source_site=item[<span class="string">"source_site"</span>].encode(<span class="string">"utf-8"</span>))</div><div class="line">        <span class="keyword">with</span> session_scope(self.Session) <span class="keyword">as</span> session:</div><div class="line">            session.add(a)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+<h3 id="修改run-py启动脚本"><a href="#修改run-py启动脚本" class="headerlink" title="修改run.py启动脚本"></a>修改run.py启动脚本</h3><p>我们将上面的run.py稍作修改即可定制我们的文章爬虫启动脚本
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="keyword">from</span> spiders.article_spider <span class="keyword">import</span> ArticleSpider</div><div class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</div><div class="line"><span class="keyword">from</span> scrapy.crawler <span class="keyword">import</span> CrawlerRunner</div><div class="line"><span class="keyword">from</span> scrapy.utils.project <span class="keyword">import</span> get_project_settings</div><div class="line"><span class="keyword">from</span> scrapy.utils.log <span class="keyword">import</span> configure_logging</div><div class="line"><span class="keyword">from</span> coolscrapy.models <span class="keyword">import</span> db_connect</div><div class="line"><span class="keyword">from</span> coolscrapy.models <span class="keyword">import</span> ArticleRule</div><div class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    settings = get_project_settings()</div><div class="line">    configure_logging(settings)</div><div class="line">    db = db_connect()</div><div class="line">    Session = sessionmaker(bind=db)</div><div class="line">    session = Session()</div><div class="line">    rules = session.query(ArticleRule).filter(ArticleRule.enable == <span class="number">1</span>).all()</div><div class="line">    session.close()</div><div class="line">    runner = CrawlerRunner(settings)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> rule <span class="keyword">in</span> rules:</div><div class="line">        <span class="comment"># stop reactor when spider closes</span></div><div class="line">        <span class="comment"># runner.signals.connect(spider_closing, signal=signals.spider_closed)</span></div><div class="line">        runner.crawl(ArticleSpider, rule=rule)</div><div class="line"></div><div class="line">    d = runner.join()</div><div class="line">    d.addBoth(<span class="keyword">lambda</span> _: reactor.stop())</div><div class="line"></div><div class="line">    <span class="comment"># blocks process so always keep as the last statement</span></div><div class="line">    reactor.run()</div><div class="line">    logging.info(<span class="string">'all finished.'</span>)</div></pre></td></tr></table></figure></p>
+<p>OK，一切搞定。现在我们可以往ArticleRule表中加入成百上千个网站的规则，而不用添加一行代码，就可以对这成百上千个网站进行爬取。
+当然你完全可以做一个Web前端来完成维护ArticleRule表的任务。当然ArticleRule规则也可以放在除了数据库的任何地方，比如配置文件。</p>
+<p>你可以在<a href="https://github.com/yidao620c/core-scrapy" target="_blank" rel="external">GitHub</a>上看到本文的完整项目源码。</p>
 
-
-# 一行代码计算出1-100之间的素数(两个版本)
-print(&apos; &apos;.join([str(item) for item in filter(lambda x: not [x % i for i in range(2, x) if x % i == 0], range(2, 101))]))
-print(&apos; &apos;.join([str(item) for item in filter(lambda x: all(map(lambda p: x % p != 0, range(2, x))), range(2, 101))]))
-
-
-# 一行代码输出斐波那契数列
-print([x[0] for x in [(a[i][0], a.append([a[i][1], a[i][0]+a[i][1]])) for a in ([[1, 1]], ) for i in range(30)]])
-
-
-# 一行代码实现快排算法
-qsort = lambda arr: len(arr) &gt; 1 and qsort(list(filter(lambda x: x &lt;= arr[0], arr[1:]))) + arr[0:1] + qsort(list(filter(lambda x: x &gt; arr[0], arr[1:]))) or arr
-
-
-# 一行代码解决八皇后问题
-[__import__(&apos;sys&apos;).stdout.write(&apos;\n&apos;.join(&apos;.&apos; * i + &apos;Q&apos; + &apos;.&apos; * (8-i-1) for i in vec) + &quot;\n========\n&quot;) for vec in __import__(&apos;itertools&apos;).permutations(range(8)) if 8 == len(set(vec[i]+i for i in range(8))) == len(set(vec[i]-i for i in range(8)))]
-
-
-# 一行代码实现数组的flatten功能: 将多维数组转化为一维
-flatten = lambda x: [y for l in x for y in flatten(l)] if isinstance(x, list) else [x]
-
-
-# 一行代码实现list, 有点类似与上个功能的反功能
-array = lambda x: [x[i:i+3] for i in range(0, len(x), 3)]
-
-
-# 一行代码实现求解2的1000次方的各位数之和
-print(sum(map(int, str(2**1000))))
-</code></pre><h2 id="with"><a href="#with" class="headerlink" title="with"></a>with</h2><pre><code># 内置库contextlib的使用
-@contextlib.contextmanager
-def open_func(file_name):
-    # __enter__方法
-    print(&quot;open file:&quot;, file_name, &quot;in __enter__&quot;)
-    file_handler = open(file_name, &quot;r&quot;)
-
-    yield file_handler
-
-    # __exit__方法
-    print(&quot;close file:&quot;, file_name, &quot;in __exit__&quot;)
-    file_handler.close()
-    return
-
-# 使用实例
-with open_func(&quot;python_base.py&quot;) as file_in:
-    for line in file_in:
-        print(line)
-        break
-
-
-# 内置库contextlib的使用
-class MyOpen2(object):
-
-    def __init__(self, file_name):
-        &quot;&quot;&quot;初始化方法&quot;&quot;&quot;
-        self.file_handler = open(file_name, &quot;r&quot;)
-        return
-
-    def close(self):
-        &quot;&quot;&quot;关闭文件，会被自动调用&quot;&quot;&quot;
-        print(&quot;call close in MyOpen2&quot;)
-        if self.file_handler:
-            self.file_handler.close()
-        return
-
-# 使用实例
-with contextlib.closing(MyOpen2(&quot;python_base.py&quot;)) as file_in:
-    pass
-</code></pre>
           
         
       
@@ -2376,7 +2232,7 @@ with contextlib.closing(MyOpen2(&quot;python_base.py&quot;)) as file_in:
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2421,18 +2277,25 @@ with contextlib.closing(MyOpen2(&quot;python_base.py&quot;)) as file_in:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2492,6 +2355,10 @@ with contextlib.closing(MyOpen2(&quot;python_base.py&quot;)) as file_in:
                   <a href="http://www.cnblogs.com/" title="博客园" target="_blank">博客园</a>
                 </li>
               
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="https://www.v2ex.com/" title="v2ex" target="_blank">v2ex</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -2518,7 +2385,7 @@ with contextlib.closing(MyOpen2(&quot;python_base.py&quot;)) as file_in:
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

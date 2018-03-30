@@ -1,0 +1,1040 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="浏览器,selenium," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="满天星辰" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="selenium–隐式等待12345678driver.implicitly_wait(5)driver.save_screenshot(&amp;apos;e:\screenshot.png&amp;apos;)driver.set_page_load_timeout(10)driver.set_script_timeout(10)text = driver.page_sourceCOOKIES_ENABLES">
+<meta name="keywords" content="浏览器,selenium">
+<meta property="og:type" content="article">
+<meta property="og:title" content="selenium">
+<meta property="og:url" content="https://www.xncoding.com/2018/03/30/python/selenium.html">
+<meta property="og:site_name" content="满天星辰">
+<meta property="og:description" content="selenium–隐式等待12345678driver.implicitly_wait(5)driver.save_screenshot(&amp;apos;e:\screenshot.png&amp;apos;)driver.set_page_load_timeout(10)driver.set_script_timeout(10)text = driver.page_sourceCOOKIES_ENABLES">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T23:31:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="selenium">
+<meta name="twitter:description" content="selenium–隐式等待12345678driver.implicitly_wait(5)driver.save_screenshot(&amp;apos;e:\screenshot.png&amp;apos;)driver.set_page_load_timeout(10)driver.set_script_timeout(10)text = driver.page_sourceCOOKIES_ENABLES">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xncoding.com/2018/03/30/python/selenium.html"/>
+
+
+
+
+
+  <title> selenium | 满天星辰 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">满天星辰</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://www.xncoding.com/2018/03/30/python/selenium.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="满天星辰">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                selenium
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T15:32:03+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/30/python/selenium.html" class="leancloud_visitors" data-flag-title="selenium">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="selenium"><a href="#selenium" class="headerlink" title="selenium"></a>selenium</h1><h2 id="–隐式等待"><a href="#–隐式等待" class="headerlink" title="–隐式等待"></a>–隐式等待</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">driver.implicitly_wait(5)</div><div class="line">driver.save_screenshot(&apos;e:\screenshot.png&apos;)</div><div class="line">driver.set_page_load_timeout(10)</div><div class="line">driver.set_script_timeout(10)</div><div class="line">text = driver.page_source</div><div class="line">COOKIES_ENABLES = False</div><div class="line">driver.close()</div><div class="line">driver.quit()</div></pre></td></tr></table></figure>
+<h2 id="–多层框架或窗口的定位："><a href="#–多层框架或窗口的定位：" class="headerlink" title="–多层框架或窗口的定位："></a>–多层框架或窗口的定位：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">switch_to_frame()</div><div class="line">switch_to_window()</div><div class="line">driver.switch_to_frame(driver.find_element_by_id``(&quot;topmenuFrame&quot;))</div><div class="line">driver.switch_to_default_content()</div><div class="line">· text  获取该元素的文本</div><div class="line">· submit  提交表单</div><div class="line">· get_attribute  获得属性值</div><div class="line"># --处理下拉框</div><div class="line">switch_to_alert()</div><div class="line">accept()</div></pre></td></tr></table></figure>
+<h2 id="–find"><a href="#–find" class="headerlink" title="–find"></a>–find</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">find_element_by_id</div><div class="line">find_element_by_name</div><div class="line">find_element_by_xpath</div><div class="line">find_element_by_link_text</div><div class="line">find_element_by_partial_link_text</div><div class="line">find_element_by_tag_name</div><div class="line">find_element_by_class_name</div><div class="line">find_element_by_css_selector</div></pre></td></tr></table></figure>
+<h2 id="–cookies"><a href="#–cookies" class="headerlink" title="–cookies"></a>–cookies</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cookie = [item[&quot;name&quot;] + &quot;=&quot; + item[&quot;value&quot;] for item in driver.get_cookies()]</div><div class="line">cookiestr = &apos;;&apos;.join(item for item in cookie)</div><div class="line">driver.get_cookies（）   获得cookie信息</div><div class="line">add_cookie(cookie_dict)  向cookie添加会话信息</div><div class="line">delete_cookie(name)      删除特定(部分)的cookie</div><div class="line">delete_all_cookies()     删除所有cookie</div></pre></td></tr></table></figure>
+<h2 id="–input"><a href="#–input" class="headerlink" title="–input"></a>–input</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from selenium.webdriver.common.keys import Keys</div><div class="line">elem = driver.find_element_by_name(&quot;q&quot;)</div><div class="line">elem.clear()</div><div class="line">elem.send_keys(&quot;python&quot;)</div><div class="line"># click</div><div class="line">click()</div><div class="line">context_click()  右击</div><div class="line">double_click()   双击</div><div class="line">drag_and_drop()  拖动</div></pre></td></tr></table></figure>
+<h2 id="–phantomjs"><a href="#–phantomjs" class="headerlink" title="–phantomjs"></a>–phantomjs</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">from selenium import webdriver</div><div class="line">from selenium.webdriver.common.desired_capabilities import DesiredCapabilities</div><div class="line">service_args = []</div><div class="line">service_args.append(&apos;--load-images=no&apos;)  # 关闭图片加载</div><div class="line">service_args.append(&apos;--disk-cache=yes&apos;)  # 开启缓存</div><div class="line">service_args.append(&apos;--ignore-ssl-errors=true&apos;)  # 忽略https错误</div><div class="line">dcap = dict(DesiredCapabilities.PHANTOMJS)</div><div class="line"># 从USER_AGENTS列表中随机选一个浏览器头，伪装浏览器</div><div class="line">dcap[&quot;phantomjs.page.settings&quot;] = (</div><div class="line">    &#123;&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Linux; Android 4.4.2; en-us; SAMSUNG SCH-I545 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/1.5 Chrome/28.0.1500.94 Mobile Safari/537.36&quot;&#125;)</div><div class="line"># 不载入图片，爬页面速度会快很多</div><div class="line">dcap[&quot;phantomjs.page.settings.loadImages&quot;] = False</div><div class="line">driver = webdriver.PhantomJS(</div><div class="line">    desired_capabilities=dcap, service_args=service_args)</div><div class="line">driver.get_screenshot_as_file(&apos;01.png&apos;)</div><div class="line">driver.quit()</div></pre></td></tr></table></figure>
+<h2 id="–调用js"><a href="#–调用js" class="headerlink" title="–调用js"></a>–调用js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">driver.execute_async_script(js)</div><div class="line">driver.execute_script(js)</div></pre></td></tr></table></figure>
+<h1 id="service-args"><a href="#service-args" class="headerlink" title="service_args"></a>service_args</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">–user - data - dir =”[PATH]” 指定用户文件夹User Data路径，可以把书签这样的用户数据保存在系统分区以外的分区。</div><div class="line">–disk - cache - dir =”[PATH]“ 指定缓存Cache路径</div><div class="line">–disk - cache - size = 指定Cache大小，单位Byte</div><div class="line">–first run 重置到初始状态，第一次运行</div><div class="line">–incognito 隐身模式启动</div><div class="line">–disable - javascript 禁用Javascript</div><div class="line">--omnibox - popup - count = &quot;num&quot; 将地址栏弹出的提示菜单数量改为num个。我都改为15个了。</div><div class="line">--user - agent = &quot;xxxxxxxx&quot; 修改HTTP请求头部的Agent字符串，可以通过about: version页面查看修改效果</div><div class="line">--disable - plugins 禁止加载所有插件，可以增加速度。可以通过about: plugins页面查看效果</div><div class="line">--disable - javascript 禁用JavaScript，如果觉得速度慢在加上这个</div><div class="line">--disable - java 禁用java</div><div class="line">--start - maximized 启动就最大化</div><div class="line">--no - sandbox 取消沙盒模式</div><div class="line">--single - process 单进程运行</div><div class="line">--process - per - tab 每个标签使用单独进程</div><div class="line">--process - per - site 每个站点使用单独进程</div><div class="line">--in-process - plugins 插件不启用单独进程</div><div class="line">--disable - popup - blocking 禁用弹出拦截</div><div class="line">--disable - plugins 禁用插件</div><div class="line">--disable - images 禁用图像</div><div class="line">--incognito 启动进入隐身模式</div><div class="line">--enable - udd - profiles 启用账户切换菜单</div><div class="line">--proxy - pac - url 使用pac代理[via 1 / 2]</div><div class="line">--lang = zh - CN 设置语言为简体中文</div><div class="line">--disk - cache - dir 自定义缓存目录</div><div class="line">--disk - cache - size 自定义缓存最大值（单位byte）</div><div class="line">--media - cache - size 自定义多媒体缓存最大值（单位byte）</div><div class="line">--bookmark - menu 在工具 栏增加一个书签按钮</div><div class="line">--enable - sync 启用书签同步</div></pre></td></tr></table></figure>
+<h2 id="chrome"><a href="#chrome" class="headerlink" title="chrome"></a>chrome</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">from selenium import webdriver</div><div class="line"># 进入浏览器设置</div><div class="line">options = webdriver.ChromeOptions()</div><div class="line"># 设置中文</div><div class="line">options.add_argument(&apos;lang=zh_CN.UTF-8&apos;)</div><div class="line">chrome_options = webdriver.ChromeOptions()</div><div class="line">chrome_options.add_argument(&apos;--headless&apos;)</div><div class="line">chrome_options.add_argument(&apos;--disable-gpu&apos;)</div><div class="line"># 更换头部</div><div class="line">options.add_argument(</div><div class="line">    &apos;user-agent=&quot;Mozilla/5.0 (iPod; U; CPU iPhone OS 2_1 like Mac OS X; ja-jp) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5F137 Safari/525.20&quot;&apos;)</div><div class="line"># 代理</div><div class="line">service_args = [&apos;--proxy=94.182.202.165:8080&apos;, &apos;--proxy-type=http&apos;]</div><div class="line">option.add_argument(&apos;--start-maximized&apos;)  # 最大化</div><div class="line">option.add_argument(&apos;--user-data-dir=E:\\Chrome\\User Data&apos;)  # 设置成用户自己的数据目录</div><div class="line">browser = webdriver.Chrome(executable_path=&apos;E:\\Chrome\\chromedriver.exe&apos;,</div><div class="line">                           chrome_options=options, service_args=service_args)</div><div class="line">url = &quot;https://httpbin.org/get?show_env=1&quot;</div><div class="line">browser.get(url)</div><div class="line">input(&quot;查看效果&quot;)</div><div class="line">browser.quit()</div><div class="line"># -chrome some crx</div><div class="line">option.add_argument(&apos;--user-agent=iphone&apos;)</div><div class="line">option.add_extension(&apos;d:\crx\AdBlock_v2.17.crx&apos;)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器-selenium/" rel="tag"># 浏览器,selenium</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/30/python/抓取动态网站.html" rel="next" title="抓取动态网站">
+                <i class="fa fa-chevron-left"></i> 抓取动态网站
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/python/scrapy.html" rel="prev" title="scrapy">
+                scrapy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="bo" />
+          <p class="site-author-name" itemprop="name">bo</p>
+           
+              <p class="site-description motion-element" itemprop="description">宅男</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bolearnpython" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.huxiu.com/" title="虎嗅网" target="_blank">虎嗅网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.infoq.com/cn/" title="InfoQ" target="_blank">InfoQ</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://blog.jobbole.com/" title="伯乐在线" target="_blank">伯乐在线</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="http://www.cnblogs.com/" title="博客园" target="_blank">博客园</a>
+                </li>
+              
+                <li class="links-of-blogroll-item" style="margin-left: 8px; width:45%;">
+                  <a href="https://www.v2ex.com/" title="v2ex" target="_blank">v2ex</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#selenium"><span class="nav-number">1.</span> <span class="nav-text">selenium</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#–隐式等待"><span class="nav-number">1.1.</span> <span class="nav-text">–隐式等待</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–多层框架或窗口的定位："><span class="nav-number">1.2.</span> <span class="nav-text">–多层框架或窗口的定位：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–find"><span class="nav-number">1.3.</span> <span class="nav-text">–find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–cookies"><span class="nav-number">1.4.</span> <span class="nav-text">–cookies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–input"><span class="nav-number">1.5.</span> <span class="nav-text">–input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–phantomjs"><span class="nav-number">1.6.</span> <span class="nav-text">–phantomjs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#–调用js"><span class="nav-number">1.7.</span> <span class="nav-text">–调用js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#service-args"><span class="nav-number">2.</span> <span class="nav-text">service_args</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome"><span class="nav-number">2.1.</span> <span class="nav-text">chrome</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+<div class="theme-info">粤ICP备17025554号-1</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="local-search-pop-overlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("AXBtbvjnaMP2cE34U1CAjLqF-gzGzoHsz", "6CKwM1armacelKCp8mh4StM4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
